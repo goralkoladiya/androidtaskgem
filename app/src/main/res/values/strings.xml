@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Task Gem</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="invite_code">INVITE CODE</string>
+    <string name="win_coins">Win %1$d coins by completing a survey</string>
+    <string name="win_coins_offer">This is a great offer</string>
+    <string name="win_coins_not_eligible">Unfortunately you were not eligible, you still get %1$d coins</string>
+    <string name="landscape_warn">Pollfish is only shown in Portrait mode, except in tablets</string>
+    <string name="survey_completed">Pollfish Survey Completed - Congratulations, you have won %1$d coins!</string>
+    <string name="survey_offerwall_completed">Pollfish Survey Completed</string>
+    <string name="logging">Logging ...</string>
+    <string name="user_not_eligible">User Not Eligible</string>
+    <string name="user_rejected_survey">User Rejected Survey</string>
+    <string name="survey_not_available">Pollfish Survey Not Available</string>
+    <string name="offerwall_available">Pollfish Offerwall available</string>
+    <string name="survey_received">Pollfish Survey Received</string>
+    <string name="on_pollfish_closed">onPollfishClosed</string>
+    <string name="on_pollfish_opened">onPollfishOpened</string>
+</resources>

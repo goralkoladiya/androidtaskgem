@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="lightpurple">#37BB86FC</color>
+    <color name="lightpurple1">#61BB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blackish">#2D2D2D</color>
+    <color name="orange">#F27E30</color>
+    <color name="orangeopacity">#0DF27E30</color>
+    <color name="blue">#3C3C5D</color>
+    <color name="grey">#DDDDDD</color>
+    <color name="color1">#E7E7E7</color>
+    <color name="color2">#FFD5C7</color>
+    <color name="color3">#D2ECD0</color>
+    <color name="boxcolor">#91CECE</color>
+    <color name="referbox">#B7EFEC</color>
+    <color name="paytmbox">#26B7EFEC</color>
+    <color name="login">#FAEFE5</color>
+    <color name="coincolor">#939393</color>
+    <color name="ponitcolor">#2D2D2D</color>
+    <color name="creditcolor">#409CB5</color>
+    <color name="scratchViewDefaultColor">#1A33A7</color>
+</resources>

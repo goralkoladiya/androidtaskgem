@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "1026119959686",
+    "project_id": "taskgem-app",
+    "storage_bucket": "taskgem-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1026119959686:android:c2e14f72941c9c722b3d07",
+        "android_client_info": {
+          "package_name": "com.example.androidtaskgem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1026119959686-gkhb6etfqdh8e0nu306iml9smuu2iiv3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgAt5pRME7z2zsZ6vE2MtuapewLhVPmI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1026119959686-gkhb6etfqdh8e0nu306iml9smuu2iiv3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1026119959686:android:24561730d03eb1ed2b3d07",
+        "android_client_info": {
+          "package_name": "com.taskgem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1026119959686-gkhb6etfqdh8e0nu306iml9smuu2iiv3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgAt5pRME7z2zsZ6vE2MtuapewLhVPmI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1026119959686-gkhb6etfqdh8e0nu306iml9smuu2iiv3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

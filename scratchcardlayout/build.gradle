@@ -1,0 +1,60 @@
+apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+publish {
+    def groupProjectID = 'in.codeshuffle.scratchcardlayout'
+    def artifactProjectID = 'ScratchCardLayout'
+    def publishVersionID = '1.0.8'
+
+    userOrg = 'skymansandy'
+    repoName = 'ScratchCard'
+    groupId = groupProjectID
+    artifactId = artifactProjectID
+    publishVersion = publishVersionID
+    desc = 'A simple Android library for scratch card reveal kind of effect'
+    website = 'https://github.com/skymansandy/scratchCardLayout'
+}
+
+android {
+    compileSdkVersion 33
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 33
+        versionCode 3
+        versionName "1.0.9"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
+}
+
+/**
+ *
+ Steps to upload to bintray
+
+ $ export JAVA_HOME=`/usr/libexec/java_home -v  1.8.0_252`
+
+ $ export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+
+ $ ./gradlew clean build bintrayUpload -PbintrayUser=user -PbintrayKey=apikey -PdryRun=false
+
+ */

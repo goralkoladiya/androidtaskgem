@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/login"
+    android:orientation="vertical"
+    tools:context="com.taskgem.Activities.loginActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_weight="4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/_5sdp"
+            android:src="@drawable/logo" />
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_300sdp"
+                android:src="@drawable/login"/>
+            <TextView
+                android:id="@+id/task"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:layout_marginLeft="@dimen/_18sdp"
+                android:fontFamily="@font/bold"
+                android:textSize="@dimen/_15sdp"
+                android:textColor="@color/blackish"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Task and Earn, Better than Best!" />
+
+            <com.google.android.gms.common.SignInButton
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:id="@+id/sign_in_button" />
+<!--                        <ImageView-->
+<!--                android:id="@+id/gmail"-->
+<!--                android:layout_below="@+id/task"-->
+<!--                android:layout_marginHorizontal="@dimen/_10sdp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/_80sdp"-->
+<!--                android:src="@drawable/playbutton"/>-->
+            <LinearLayout
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:buttonTint="#9BD0DE"
+                    android:id="@+id/check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:fontFamily="@font/semibold"
+                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/blackish"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="By signing up you agree to our TaskGem Privacy Policy" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
