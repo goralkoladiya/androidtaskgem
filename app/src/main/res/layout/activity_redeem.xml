@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".Activities.RedeemActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -18,13 +19,13 @@
             <TextView
                 android:text="Rewards"
                 android:gravity="center"
-                android:textSize="@dimen/_20sdp"
+                android:textSize="@dimen/_12sdp"
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/appname"
                 android:textColor="@color/blackish"
-                android:fontFamily="@font/bold"/>
+                android:fontFamily="@font/semibold"/>
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
     <ScrollView
@@ -39,8 +40,8 @@
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:layout_marginTop="@dimen/_7sdp"
-                    android:layout_marginLeft="@dimen/_18sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginLeft="@dimen/_15sdp"
                     android:fontFamily="@font/semibold"
                     android:textSize="@dimen/_15sdp"
                     android:id="@+id/coins"
@@ -56,30 +57,35 @@
                 <RelativeLayout
                     android:layout_alignParentEnd="true"
                     android:id="@+id/frame"
-                    android:layout_margin="@dimen/_3sdp"
+                    android:layout_margin="@dimen/_15sdp"
                     android:background="@drawable/rect"
-                    android:layout_width="@dimen/_90sdp"
-                    android:layout_height="@dimen/_40sdp">
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_30sdp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
                         <ImageView
+                            android:gravity="center"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
                             android:src="@drawable/coin"
                             />
                         <TextView
+                            android:layout_marginLeft="0dp"
+                            android:paddingLeft="0dp"
                             android:id="@+id/coin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/regular"
-                            android:text="1200"
+                            android:text="120000"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_15sdp"/>
+                            android:textSize="@dimen/_12sdp"/>
                     </LinearLayout>
+
+
                 </RelativeLayout>
             </RelativeLayout>
             <View
@@ -91,19 +97,18 @@
                 android:layout_marginTop="@dimen/_7sdp"
                 android:layout_marginLeft="@dimen/_18sdp"
                 android:fontFamily="@font/semibold"
-                android:textSize="@dimen/_15sdp"
+                android:textSize="@dimen/_13sdp"
                 android:textColor="@color/blackish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Redeem coin with Paytm" />
 
             <RelativeLayout
-
                 android:layout_margin="@dimen/_15sdp"
                 android:background="@drawable/paytmbox"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_height="@dimen/_100sdp">
+                android:layout_height="@dimen/_70sdp">
                 <ImageView
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_centerVertical="true"
@@ -123,8 +128,8 @@
                         android:id="@+id/frame1"
                         android:layout_margin="@dimen/_3sdp"
                         android:background="@drawable/rect"
-                        android:layout_width="@dimen/_90sdp"
-                        android:layout_height="@dimen/_40sdp">
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_25sdp">
                         <LinearLayout
                             android:id="@+id/paytm1"
                             android:layout_width="match_parent"
@@ -133,8 +138,8 @@
                             android:orientation="horizontal">
                             <ImageView
                                 android:layout_marginLeft="@dimen/_10sdp"
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:src="@drawable/coin"
                                 />
                             <TextView
@@ -143,15 +148,15 @@
                                 android:fontFamily="@font/regular"
                                 android:text="1600"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_15sdp"/>
+                                android:textSize="@dimen/_10sdp"/>
                         </LinearLayout>
                     </RelativeLayout>
                     <TextView
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/bold"
-                        android:textSize="@dimen/_22sdp"
+                        android:fontFamily="@font/semibold"
+                        android:textSize="@dimen/_12sdp"
                         android:drawableLeft="@drawable/rssize"
                         android:text="15"/>
                 </LinearLayout>
@@ -161,7 +166,7 @@
                 android:background="@drawable/paytmbox"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_height="@dimen/_100sdp">
+                android:layout_height="@dimen/_70sdp">
                 <ImageView
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_centerVertical="true"
@@ -181,8 +186,8 @@
                         android:id="@+id/frame2"
                         android:layout_margin="@dimen/_3sdp"
                         android:background="@drawable/rect"
-                        android:layout_width="@dimen/_90sdp"
-                        android:layout_height="@dimen/_40sdp">
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_25sdp">
                         <LinearLayout
                             android:id="@+id/paytm2"
                             android:layout_width="match_parent"
@@ -191,8 +196,8 @@
                             android:orientation="horizontal">
                             <ImageView
                                 android:layout_marginLeft="@dimen/_10sdp"
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:src="@drawable/coin"
                                 />
                             <TextView
@@ -201,15 +206,15 @@
                                 android:fontFamily="@font/regular"
                                 android:text="4800"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_15sdp"/>
+                                android:textSize="@dimen/_10sdp"/>
                         </LinearLayout>
                     </RelativeLayout>
                     <TextView
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/bold"
-                        android:textSize="@dimen/_22sdp"
+                        android:fontFamily="@font/semibold"
+                        android:textSize="@dimen/_12sdp"
                         android:drawableLeft="@drawable/rssize"
                         android:text="50"/>
                 </LinearLayout>
@@ -219,7 +224,7 @@
                 android:background="@drawable/paytmbox"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_height="@dimen/_100sdp">
+                android:layout_height="@dimen/_70sdp">
                 <ImageView
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_centerVertical="true"
@@ -239,8 +244,8 @@
                         android:id="@+id/frame3"
                         android:layout_margin="@dimen/_3sdp"
                         android:background="@drawable/rect"
-                        android:layout_width="@dimen/_90sdp"
-                        android:layout_height="@dimen/_40sdp">
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_25sdp">
                         <LinearLayout
                             android:id="@+id/paytm3"
                             android:layout_width="match_parent"
@@ -249,8 +254,8 @@
                             android:orientation="horizontal">
                             <ImageView
                                 android:layout_marginLeft="@dimen/_10sdp"
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:src="@drawable/coin"
                                 />
                             <TextView
@@ -259,15 +264,15 @@
                                 android:fontFamily="@font/regular"
                                 android:text="9500"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_15sdp"/>
+                                android:textSize="@dimen/_10sdp"/>
                         </LinearLayout>
                     </RelativeLayout>
                     <TextView
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/bold"
-                        android:textSize="@dimen/_22sdp"
+                        android:fontFamily="@font/semibold"
+                        android:textSize="@dimen/_12sdp"
                         android:drawableLeft="@drawable/rssize"
                         android:text="100"/>
                 </LinearLayout>
@@ -276,7 +281,7 @@
                 android:layout_marginTop="@dimen/_7sdp"
                 android:layout_marginLeft="@dimen/_18sdp"
                 android:fontFamily="@font/semibold"
-                android:textSize="@dimen/_15sdp"
+                android:textSize="@dimen/_13sdp"
                 android:textColor="@color/blackish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -286,12 +291,12 @@
                 android:background="@drawable/googleplaybox"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_height="@dimen/_100sdp">
+                android:layout_height="@dimen/_70sdp">
                 <ImageView
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_centerVertical="true"
                     android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_100sdp"
+                    android:layout_height="@dimen/_70sdp"
                     android:padding="@dimen/_5sdp"
                     android:src="@drawable/googleplay"/>
                 <LinearLayout
@@ -306,8 +311,8 @@
                         android:id="@+id/frame4"
                         android:layout_margin="@dimen/_3sdp"
                         android:background="@drawable/rect"
-                        android:layout_width="@dimen/_90sdp"
-                        android:layout_height="@dimen/_40sdp">
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_25sdp">
                         <LinearLayout
                             android:id="@+id/gp1"
                             android:layout_width="match_parent"
@@ -316,8 +321,8 @@
                             android:orientation="horizontal">
                             <ImageView
                                 android:layout_marginLeft="@dimen/_10sdp"
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:src="@drawable/coin"
                                 />
                             <TextView
@@ -326,15 +331,15 @@
                                 android:fontFamily="@font/regular"
                                 android:text="1100"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_15sdp"/>
+                                android:textSize="@dimen/_10sdp"/>
                         </LinearLayout>
                     </RelativeLayout>
                     <TextView
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/bold"
-                        android:textSize="@dimen/_22sdp"
+                        android:fontFamily="@font/semibold"
+                        android:textSize="@dimen/_12sdp"
                         android:drawableLeft="@drawable/rssize"
                         android:text="10"/>
                 </LinearLayout>
@@ -344,12 +349,12 @@
                 android:background="@drawable/googleplaybox"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_height="@dimen/_100sdp">
+                android:layout_height="@dimen/_70sdp">
                 <ImageView
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_centerVertical="true"
                     android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_100sdp"
+                    android:layout_height="@dimen/_70sdp"
                     android:padding="@dimen/_5sdp"
                     android:src="@drawable/googleplay"/>
                 <LinearLayout
@@ -364,8 +369,8 @@
                         android:id="@+id/frame5"
                         android:layout_margin="@dimen/_3sdp"
                         android:background="@drawable/rect"
-                        android:layout_width="@dimen/_90sdp"
-                        android:layout_height="@dimen/_40sdp">
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_25sdp">
                         <LinearLayout
                             android:id="@+id/gp2"
                             android:layout_width="match_parent"
@@ -374,8 +379,8 @@
                             android:orientation="horizontal">
                             <ImageView
                                 android:layout_marginLeft="@dimen/_10sdp"
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:src="@drawable/coin"
                                 />
                             <TextView
@@ -384,15 +389,15 @@
                                 android:fontFamily="@font/regular"
                                 android:text="2500"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_15sdp"/>
+                                android:textSize="@dimen/_10sdp"/>
                         </LinearLayout>
                     </RelativeLayout>
                     <TextView
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/bold"
-                        android:textSize="@dimen/_22sdp"
+                        android:fontFamily="@font/semibold"
+                        android:textSize="@dimen/_12sdp"
                         android:drawableLeft="@drawable/rssize"
                         android:text="25"/>
                 </LinearLayout>
@@ -402,12 +407,12 @@
                 android:background="@drawable/googleplaybox"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_height="@dimen/_100sdp">
+                android:layout_height="@dimen/_70sdp">
                 <ImageView
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_centerVertical="true"
                     android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_100sdp"
+                    android:layout_height="@dimen/_70sdp"
                     android:padding="@dimen/_5sdp"
                     android:src="@drawable/googleplay"/>
                 <LinearLayout
@@ -422,8 +427,8 @@
                         android:id="@+id/frame6"
                         android:layout_margin="@dimen/_3sdp"
                         android:background="@drawable/rect"
-                        android:layout_width="@dimen/_90sdp"
-                        android:layout_height="@dimen/_40sdp">
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_25sdp">
                         <LinearLayout
                             android:id="@+id/gp3"
                             android:layout_width="match_parent"
@@ -432,8 +437,8 @@
                             android:orientation="horizontal">
                             <ImageView
                                 android:layout_marginLeft="@dimen/_10sdp"
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
                                 android:src="@drawable/coin"
                                 />
                             <TextView
@@ -442,15 +447,15 @@
                                 android:fontFamily="@font/regular"
                                 android:text="4800"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_15sdp"/>
+                                android:textSize="@dimen/_10sdp"/>
                         </LinearLayout>
                     </RelativeLayout>
                     <TextView
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/bold"
-                        android:textSize="@dimen/_22sdp"
+                        android:fontFamily="@font/semibold"
+                        android:textSize="@dimen/_12sdp"
                         android:drawableLeft="@drawable/rssize"
                         android:text="50"/>
                 </LinearLayout>

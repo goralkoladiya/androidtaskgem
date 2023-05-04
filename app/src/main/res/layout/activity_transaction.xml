@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".Activities.transaction">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -18,13 +19,13 @@
             <TextView
                 android:text="Transaction Log"
                 android:gravity="center"
-                android:textSize="@dimen/_20sdp"
+                android:textSize="@dimen/_12sdp"
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/appname"
                 android:textColor="@color/blackish"
-                android:fontFamily="@font/bold"/>
+                android:fontFamily="@font/semibold"/>
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 

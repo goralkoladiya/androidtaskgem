@@ -3,6 +3,8 @@ package com.taskgem.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -55,6 +57,12 @@ public class ReferActivity extends AppCompatActivity {
         invite=findViewById(R.id.invite);
         invitees=findViewById(R.id.invitees);
 
+        invite.setOnClickListener(v -> {
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("label", sharedPreferences.getString("token","ABCD"));
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(this, "Copied", Toast.LENGTH_SHORT).show();
+        });
 
 
         RequestQueue queue = Volley.newRequestQueue(this);

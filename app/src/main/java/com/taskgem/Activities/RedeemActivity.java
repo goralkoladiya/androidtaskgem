@@ -1,5 +1,4 @@
 package com.taskgem.Activities;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -29,10 +28,9 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
 public class RedeemActivity extends AppCompatActivity implements View.OnClickListener {
     Toolbar toolbar;
-    SharedPreferences sharedPreferences ;
+    SharedPreferences sharedPreferences;
     SharedPreferences.Editor myEdit;
     LinearLayout paytm1,paytm2,paytm3,gp1,gp2,gp3;
     TextView coin;
@@ -63,17 +61,13 @@ public class RedeemActivity extends AppCompatActivity implements View.OnClickLis
         coin=findViewById(R.id.coin);
         coins=sharedPreferences.getInt("rewards",0);
         coin.setText(""+coins);
-
         paytm1.setOnClickListener(this);
         paytm2.setOnClickListener(this);
         paytm3.setOnClickListener(this);
         gp1.setOnClickListener(this);
         gp2.setOnClickListener(this);
         gp3.setOnClickListener(this);
-
-
     }
-
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.paytm1)
@@ -142,7 +136,6 @@ public class RedeemActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
     }
-
     void send_request(String mode,int coin,int amount)
     {
 
@@ -215,7 +208,6 @@ public class RedeemActivity extends AppCompatActivity implements View.OnClickLis
                 .show();
 
     }
-
     @Override
     public void onBackPressed() {
         Intent intent=new Intent(this,MainActivity.class);

@@ -1,5 +1,6 @@
 package com.taskgem.Adapters;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder>{
     ArrayList<MyListData> listdata;
@@ -45,26 +48,35 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
             holder.coin.setText("-"+myListData.getRewards());
             if(myListData.getStatus()==0)
             {
-                holder.reason.setText("pending");
+                holder.reason.setText(capitalize("pending"));
             }
             else {
-                holder.reason.setText("paid");
+                holder.reason.setText(capitalize("paid"));
             }
 
         }
         else
         {
             holder.title.setText("Coin Credited");
-            holder.coin.setText(myListData.getRewards());
+            holder.coin.setText("+"+myListData.getRewards());
             if(myListData.getReason().equals("credited"))
             {
-                holder.reason.setText("Credited via Spin");
+                holder.reason.setText(capitalize("Credited via Spin"));
             }
             else {
-                holder.reason.setText(myListData.getReason());
+                holder.reason.setText(capitalize(myListData.getReason()));
             }
 
         }
+    }
+    private String capitalize(String capString){
+        StringBuffer capBuffer = new StringBuffer();
+        Matcher capMatcher = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString);
+        while (capMatcher.find()){
+            capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase() + capMatcher.group(2).toLowerCase());
+        }
+
+        return capMatcher.appendTail(capBuffer).toString();
     }
     public String parseDateToddMMyyyy(String time) {
         String inputPattern = "yyyy-MM-dd HH:mm:ss";

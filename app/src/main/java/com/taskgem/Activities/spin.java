@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,14 +32,20 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.OnUserEarnedRewardListener;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.taskgem.MainActivity;
 import com.taskgem.R;
 
@@ -60,11 +67,12 @@ public class spin extends AppCompatActivity {
     int[] valueArray = {20, 2, 5, 8, 11, 14, 16, 18};
     ImageView spinView,play;
     TextView spincount,credit,timer;
-    int count=3;
+    int count=8;
     SharedPreferences sharedPreferences ;
     SharedPreferences.Editor myEdit;
     int rewards=0;
     InterstitialAd mInterstitialAd;
+    RewardedAd rewardedAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +98,21 @@ public class spin extends AppCompatActivity {
             }
         });
         AdRequest adRequest = new AdRequest.Builder().build();
+        RewardedAd.load(this, "ca-app-pub-3940256099942544/5224354917",
+                adRequest, new RewardedAdLoadCallback() {
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error.
+                        Log.d("TAG", loadAdError.toString());
+                        rewardedAd = null;
+                    }
 
+                    @Override
+                    public void onAdLoaded(@NonNull RewardedAd ad) {
+                        rewardedAd = ad;
+                        Log.d("TAG", "Ad was loaded.");
+                    }
+                });
         InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override
@@ -113,8 +135,8 @@ public class spin extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         myEdit = sharedPreferences.edit();
         rewards=sharedPreferences.getInt("rewards",0);
-//        myEdit.putInt("count",3).commit();
-        count= sharedPreferences.getInt("count",3);
+//        myEdit.putInt("count",8).commit();
+        count= sharedPreferences.getInt("count",8);
         System.out.println(sharedPreferences.getInt("count",11));
         System.out.println(""+count);
         spinView = findViewById(R.id.ivSpinner);
@@ -134,7 +156,6 @@ public class spin extends AppCompatActivity {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if(count!=0)
                 {
                     credit.setVisibility(View.GONE);
@@ -184,6 +205,65 @@ public class spin extends AppCompatActivity {
                                                 if(jsonObject.getBoolean("status"))
                                                 {
                                                     play.setEnabled(true);
+                                                    if(count%2==0)
+                                                    {
+                                                        if (rewardedAd != null) {
+                                                            Activity activityContext = spin.this;
+                                                            rewardedAd.show(activityContext, new OnUserEarnedRewardListener() {
+                                                                @Override
+                                                                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                                                                    // Handle the reward.
+                                                                    Log.d("TAG", "The user earned the reward.");
+                                                                    int rewardAmount = rewardItem.getAmount();
+                                                                    String rewardType = rewardItem.getType();
+                                                                }
+                                                            });
+                                                            rewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                                                @Override
+                                                                public void onAdClicked() {
+                                                                    // Called when a click is recorded for an ad.
+                                                                    Log.d(TAG, "Ad was clicked.");
+                                                                }
+
+                                                                @Override
+                                                                public void onAdDismissedFullScreenContent() {
+                                                                    // Called when ad is dismissed.
+                                                                    // Set the ad reference to null so you don't show the ad a second time.
+                                                                    Log.d(TAG, "Ad dismissed fullscreen content.");
+                                                                    rewardedAd = null;
+                                                                    Intent intent=new Intent(spin.this,spin.class);
+                                                                    startActivity(intent);
+                                                                    finish();
+                                                                }
+
+                                                                @Override
+                                                                public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                                                    // Called when ad fails to show.
+                                                                    Log.e(TAG, "Ad failed to show fullscreen content.");
+                                                                    rewardedAd = null;
+                                                                }
+
+                                                                @Override
+                                                                public void onAdImpression() {
+                                                                    // Called when an impression is recorded for an ad.
+                                                                    Log.d(TAG, "Ad recorded an impression.");
+                                                                }
+
+                                                                @Override
+                                                                public void onAdShowedFullScreenContent() {
+                                                                    // Called when ad is shown.
+                                                                    Log.d(TAG, "Ad showed fullscreen content.");
+                                                                }
+                                                            });
+                                                        } else {
+                                                            Log.d("TAG", "The rewarded ad wasn't ready yet.");
+                                                        }
+                                                    }
+                                                    else {
+                                                        Intent intent=new Intent(spin.this,spin.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    }
                                                 }
                                             } catch (JSONException e) {
                                                 throw new RuntimeException(e);
@@ -215,8 +295,10 @@ public class spin extends AppCompatActivity {
                     animSpin.start();
                 }
                 else {
-                    Toast.makeText(spin.this, "You have not enough coin please wait", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(spin.this, "Spin Limit Over Try Again Later...", Toast.LENGTH_SHORT).show();
                 }
+
+
 
             }
         });
@@ -230,8 +312,8 @@ public class spin extends AppCompatActivity {
             myEdit.putString("futuredate","").commit();
             if(count==0)
             {
-                myEdit.putInt("count",3).commit();
-                count=3;
+                myEdit.putInt("count",8).commit();
+                count=8;
             }
             spincount.setText("Spin Left : "+count);
             timer.setVisibility(View.GONE);
@@ -249,8 +331,8 @@ public class spin extends AppCompatActivity {
                 play.setEnabled(true);
                if(count==0)
                {
-                   myEdit.putInt("count",3).commit();
-                   count=3;
+                   myEdit.putInt("count",8).commit();
+                   count=8;
 
                }
                 spincount.setText("Spin Left : "+count);
@@ -279,7 +361,7 @@ public class spin extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
 //        cal.add(Calendar.MINUTE, days);
-        cal.add(Calendar.MINUTE, 1);
+        cal.add(Calendar.HOUR,3);
         Date futureDate = cal.getTime();
         String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(futureDate);
         myEdit.putString("futuredate",currentDateandTime);

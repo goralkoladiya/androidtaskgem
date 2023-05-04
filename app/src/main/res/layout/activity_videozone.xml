@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".Activities.videozone">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -16,15 +17,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:text="Transaction Log"
                 android:gravity="center"
-                android:textSize="@dimen/_20sdp"
+                android:textSize="@dimen/_12sdp"
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/appname"
                 android:textColor="@color/blackish"
-                android:fontFamily="@font/bold"/>
+                android:fontFamily="@font/semibold"/>
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
     <LinearLayout
@@ -34,7 +34,7 @@
 
         <TextView
             android:textColor="@color/black"
-            android:fontFamily="@font/bold"
+            android:fontFamily="@font/semibold"
             android:textSize="@dimen/_20sdp"
             android:layout_weight="1"
             android:textStyle="bold|italic"
@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
         <ImageView
-            android:layout_weight="0.5"
+            android:layout_weight="0.7"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/nodata" />

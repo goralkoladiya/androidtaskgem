@@ -27,7 +27,7 @@
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/group7">
-        <item android:id="@+id/rate" android:title="Rate Us" android:icon="@drawable/rate"/>
+        <item android:id="@+id/rateus" android:title="Rate Us" android:icon="@drawable/rate"/>
     </group>
 
 

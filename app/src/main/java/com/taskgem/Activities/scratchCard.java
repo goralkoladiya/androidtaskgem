@@ -1,11 +1,12 @@
 package com.taskgem.Activities;
-
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,11 +25,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.anupkumarpanwar.scratchview.ScratchView;
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.OnUserEarnedRewardListener;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.taskgem.MainActivity;
 import com.taskgem.R;
 
@@ -48,11 +56,11 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-
 public class scratchCard extends AppCompatActivity {
+    private static final String TAG = "";
     Toolbar toolbar;
     TextView scratchcount,scratchcredit,timer,scratchtext;
-    int count=3;
+    int count=8;
     SharedPreferences sharedPreferences ;
     SharedPreferences.Editor myEdit;
     ScratchView scratchView ;
@@ -60,6 +68,7 @@ public class scratchCard extends AppCompatActivity {
     int rewards=0,scratchcoin=0;
     List<Integer> al;
     CardView cardView;
+    RewardedAd rewardedAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,11 +90,26 @@ public class scratchCard extends AppCompatActivity {
                 finish();
             }
         });
-        al= Arrays.stream(valueArray).boxed().collect(Collectors.toList());;
+        AdRequest adRequest = new AdRequest.Builder().build();
+        RewardedAd.load(this, "ca-app-pub-3940256099942544/5224354917",
+                adRequest, new RewardedAdLoadCallback() {
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error.
+                        Log.d("TAG", loadAdError.toString());
+                        rewardedAd = null;
+                    }
+                    @Override
+                    public void onAdLoaded(@NonNull RewardedAd ad) {
+                        rewardedAd = ad;
+                        Log.d("TAG", "Ad was loaded.");
+                    }
+                });
+        al= Arrays.stream(valueArray).boxed().collect(Collectors.toList());
         sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         myEdit = sharedPreferences.edit();
         rewards=sharedPreferences.getInt("rewards",0);
-        count= sharedPreferences.getInt("scratchcount",3);
+        count= sharedPreferences.getInt("scratchcount",8);
         System.out.println(sharedPreferences.getInt("scratchcount",11));
         System.out.println(""+count);
         scratchcredit.setVisibility(View.GONE);
@@ -98,17 +122,14 @@ public class scratchCard extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        AdRequest adRequest = new AdRequest.Builder().build();
         AdView mAdView = findViewById(R.id.adView);
         mAdView.loadAd(adRequest);
         scratchView.setRevealListener(new ScratchView.IRevealListener() {
             @Override
             public void onRevealed(ScratchView scratchView) {
-//                Toast.makeText(getApplicationContext(), "Reveled", Toast.LENGTH_LONG).show();
                 if(count!=0)
                 {
                     scratchcredit.setVisibility(View.GONE);
-
 //                    play.setEnabled(false);
                     count=count-1;
                     myEdit.putInt("scratchcount",count);
@@ -131,7 +152,6 @@ public class scratchCard extends AppCompatActivity {
                     scratchView.setVisibility(View.GONE);
                     RequestQueue queue = Volley.newRequestQueue(scratchCard.this);
                     String url = "http://taskgem.in/taskgem/admin/rewards-insert-api.php";
-
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                             new Response.Listener<String>() {
                                 @Override
@@ -141,11 +161,63 @@ public class scratchCard extends AppCompatActivity {
                                         JSONObject jsonObject=new JSONObject(response);
                                         if(jsonObject.getBoolean("status"))
                                         {
-
                                            Thread.sleep(1000);
-                                            Intent intent=new Intent(scratchCard.this,scratchCard.class);
-                                            startActivity(intent);
-                                            finish();
+                                           if(count%2==0)
+                                           {
+                                               if (rewardedAd != null) {
+                                                   Activity activityContext = scratchCard.this;
+                                                   rewardedAd.show(activityContext, new OnUserEarnedRewardListener() {
+                                                       @Override
+                                                       public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                                                           // Handle the reward.
+                                                           Log.d("TAG", "The user earned the reward.");
+                                                           int rewardAmount = rewardItem.getAmount();
+                                                           String rewardType = rewardItem.getType();
+                                                       }
+                                                   });
+                                                   rewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                                       @Override
+                                                       public void onAdClicked() {
+                                                           // Called when a click is recorded for an ad.
+                                                           Log.d(TAG, "Ad was clicked.");
+                                                       }
+
+                                                       @Override
+                                                       public void onAdDismissedFullScreenContent() {
+                                                           // Called when ad is dismissed.
+                                                           // Set the ad reference to null so you don't show the ad a second time.
+                                                           Log.d(TAG, "Ad dismissed fullscreen content.");
+                                                           rewardedAd = null;
+                                                           Intent intent=new Intent(scratchCard.this,scratchCard.class);
+                                                           startActivity(intent);
+                                                           finish();
+                                                       }
+                                                       @Override
+                                                       public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                                           // Called when ad fails to show.
+                                                           Log.e(TAG, "Ad failed to show fullscreen content.");
+                                                           rewardedAd = null;
+                                                       }
+                                                       @Override
+                                                       public void onAdImpression() {
+                                                           // Called when an impression is recorded for an ad.
+                                                           Log.d(TAG, "Ad recorded an impression.");
+                                                       }
+                                                       @Override
+                                                       public void onAdShowedFullScreenContent() {
+                                                           // Called when ad is shown.
+                                                           Log.d(TAG, "Ad showed fullscreen content.");
+                                                       }
+                                                   });
+                                               } else {
+                                                   Log.d("TAG", "The rewarded ad wasn't ready yet.");
+                                               }
+                                           }
+                                           else {
+                                               Intent intent=new Intent(scratchCard.this,scratchCard.class);
+                                               startActivity(intent);
+                                               finish();
+                                           }
 //                                        play.setEnabled(true);
                                         }
                                     } catch (JSONException e) {
@@ -177,7 +249,7 @@ public class scratchCard extends AppCompatActivity {
                     queue.add(stringRequest);
                 }
                 else {
-                    Toast.makeText(scratchCard.this, "You have not enough coin please wait", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(scratchCard.this, "Scratch Limit Over Try Again Later", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -199,8 +271,8 @@ public class scratchCard extends AppCompatActivity {
             myEdit.putString("scratcfuturedate","").commit();
             if(count==0)
             {
-                myEdit.putInt("scratchcount",3).commit();
-                count=3;
+                myEdit.putInt("scratchcount",8).commit();
+                count=8;
             }
             scratchcount.setText("Scratch Left : "+count);
             timer.setVisibility(View.GONE);
@@ -222,8 +294,8 @@ public class scratchCard extends AppCompatActivity {
                 cardView.setVisibility(View.VISIBLE);
                 if(count==0)
                 {
-                    myEdit.putInt("scratchcount",3).commit();
-                    count=3;
+                    myEdit.putInt("scratchcount",8).commit();
+                    count=8;
 
                 }
                 scratchcount.setText("Scratch Left : "+count);
@@ -252,7 +324,7 @@ public class scratchCard extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
 //        cal.add(Calendar.MINUTE, days);
-        cal.add(Calendar.MINUTE, 1);
+        cal.add(Calendar.HOUR, 3);
         Date futureDate = cal.getTime();
         String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(futureDate);
         myEdit.putString("scratcfuturedate",currentDateandTime);

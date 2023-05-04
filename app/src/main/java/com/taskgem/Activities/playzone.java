@@ -1,5 +1,4 @@
 package com.taskgem.Activities;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -10,7 +9,6 @@ import android.widget.ImageView;
 
 import com.taskgem.MainActivity;
 import com.taskgem.R;
-
 public class playzone extends AppCompatActivity {
     Toolbar toolbar;
     ImageView home;

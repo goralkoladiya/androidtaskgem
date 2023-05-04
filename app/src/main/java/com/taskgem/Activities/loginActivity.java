@@ -1,5 +1,4 @@
 package com.taskgem.Activities;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,7 +46,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
 public class loginActivity extends AppCompatActivity {
     InstallReferrerClient referrerClient;
     SignInButton login;

@@ -34,7 +34,7 @@
                 android:id="@+id/task"
                 android:layout_marginBottom="@dimen/_20sdp"
                 android:layout_marginLeft="@dimen/_18sdp"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/semibold"
                 android:textSize="@dimen/_15sdp"
                 android:textColor="@color/blackish"
                 android:layout_width="match_parent"
@@ -63,15 +63,14 @@
                 <CheckBox
                     android:buttonTint="#9BD0DE"
                     android:id="@+id/check"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"/>
                 <TextView
-                    android:fontFamily="@font/semibold"
+                    android:fontFamily="@font/regular"
                     android:textSize="@dimen/_10sdp"
                     android:textColor="@color/blackish"
                     android:layout_width="match_parent"
-                    android:gravity="center"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_50sdp"
                     android:text="By signing up you agree to our TaskGem Privacy Policy" />
             </LinearLayout>
         </LinearLayout>

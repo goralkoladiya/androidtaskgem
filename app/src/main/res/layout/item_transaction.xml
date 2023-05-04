@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <RelativeLayout
@@ -20,9 +21,9 @@
             android:orientation="vertical">
             <TextView
                 android:textColor="@color/black"
-                android:fontFamily="@font/bold"
-                android:textSize="@dimen/_15sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
+                android:fontFamily="@font/semibold"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Reason"
@@ -33,6 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Reason"
+                android:inputType="textCapWords"
                 android:id="@+id/reason"/>
             <TextView
                 android:textColor="@color/coincolor"
@@ -43,7 +45,8 @@
                 android:id="@+id/date"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -51,11 +54,11 @@
             android:orientation="vertical">
             <TextView
                 android:textColor="@color/ponitcolor"
-                android:fontFamily="@font/bold"
+                android:fontFamily="@font/semibold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="+300"
-                android:textSize="@dimen/_15sdp"
+                android:text="+3"
+                android:textSize="@dimen/_10sdp"
                 android:id="@+id/coin"/>
 
         </LinearLayout>

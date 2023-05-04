@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/lightpurple1"
+    android:background="#E9FAF9"
     tools:context=".Activities.MathQuiz">
 
    <ScrollView
@@ -20,7 +20,7 @@
                android:id="@+id/toolbar"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:background="@color/lightpurple1">
+               android:background="@color/white">
                <LinearLayout
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
@@ -28,18 +28,18 @@
                    <TextView
                        android:text="Math Quiz"
                        android:gravity="center"
-                       android:textSize="@dimen/_20sdp"
+                       android:textSize="@dimen/_12sdp"
                        android:id="@+id/title"
                        android:layout_width="match_parent"
                        android:layout_height="wrap_content"
                        android:src="@drawable/appname"
                        android:textColor="@color/blackish"
-                       android:fontFamily="@font/bold"/>
+                       android:fontFamily="@font/semibold"/>
                </LinearLayout>
            </androidx.appcompat.widget.Toolbar>
            <LinearLayout
                android:layout_marginHorizontal="@dimen/_15sdp"
-               android:background="@color/lightpurple"
+               android:background="@drawable/que"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:orientation="horizontal">
@@ -93,7 +93,7 @@
                android:layout_height="@dimen/_20sdp"/>
            <LinearLayout
                android:layout_marginHorizontal="@dimen/_15sdp"
-               android:background="@color/lightpurple"
+               android:background="@drawable/que"
                android:layout_width="match_parent"
                android:layout_height="@dimen/_150sdp"
                android:orientation="horizontal">
@@ -105,7 +105,7 @@
                    android:layout_width="match_parent"
                    android:layout_height="match_parent"
                    android:textSize="@dimen/_15sdp"
-                   android:fontFamily="@font/bold"
+                   android:fontFamily="@font/semibold"
                    android:textColor="@color/blackish"/>
            </LinearLayout>
            <Space
@@ -124,9 +124,10 @@
                android:layout_width="match_parent"
                android:layout_height="@dimen/_20sdp"/>
            <EditText
+               android:inputType="number"
                android:id="@+id/ans"
                android:layout_marginHorizontal="@dimen/_25sdp"
-               android:background="@color/white"
+               android:background="@drawable/que"
                android:gravity="center"
                android:layout_gravity="center"
                android:hint="Right answer"
@@ -139,9 +140,9 @@
                android:layout_width="match_parent"
                android:layout_height="@dimen/_20sdp"/>
            <Button
+               android:background="@drawable/queans"
                android:id="@+id/submit"
                app:backgroundTint="@null"
-               android:background="@color/blackish"
                android:fontFamily="@font/semibold"
                android:layout_width="match_parent"
                android:layout_height="@dimen/_45sdp"

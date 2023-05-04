@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_height="@dimen/_140sdp">
+    android:background="@color/white"
+    android:layout_height="@dimen/_130sdp">
     <LinearLayout
         android:layout_margin="@dimen/_20sdp"
         android:layout_width="match_parent"
@@ -12,7 +13,9 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
-            android:layout_margin="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             card_view:cardCornerRadius="@dimen/_25sdp"
             card_view:cardPreventCornerOverlap="false"
             android:layout_width="wrap_content"
@@ -33,15 +36,16 @@
             android:orientation="vertical">
             <TextView
                 android:id="@+id/user"
-                android:textSize="@dimen/_13sdp"
+                android:textSize="48px"
+                android:singleLine="true"
                 android:fontFamily="@font/semibold"
                 android:textColor="@color/grey"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="User00123"/>
             <TextView
                 android:id="@+id/email"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="40px"
                 android:textColor="@color/grey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

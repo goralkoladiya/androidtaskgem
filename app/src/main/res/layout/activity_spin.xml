@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".Activities.spin">
     <ScrollView
         android:layout_above="@id/adView"
@@ -26,13 +27,13 @@
                     <TextView
                         android:text="Lucky Spin"
                         android:gravity="center"
-                        android:textSize="@dimen/_20sdp"
+                        android:textSize="@dimen/_12sdp"
                         android:id="@+id/title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:src="@drawable/appname"
                         android:textColor="@color/blackish"
-                        android:fontFamily="@font/bold"/>
+                        android:fontFamily="@font/semibold"/>
                 </LinearLayout>
             </androidx.appcompat.widget.Toolbar>
             <RelativeLayout
@@ -84,20 +85,22 @@
                 android:layout_below="@id/spinbox"
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_250sdp">
+                android:layout_height="@dimen/_230sdp">
 
                 <ImageView
                     android:id="@+id/ivSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:src="@drawable/spinwheel"/>
+
                 <ImageView
-                    android:layout_centerInParent="true"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/spinarraow"/>
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/spinarraow" />
             </RelativeLayout>
             <ImageView
+                android:layout_marginTop="@dimen/_25sdp"
                 android:id="@+id/play"
                 android:layout_alignParentBottom="true"
                 android:layout_marginHorizontal="@dimen/_10sdp"
