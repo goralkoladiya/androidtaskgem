@@ -51,7 +51,7 @@ public class mainfragment extends Fragment {
     ImageView telegram,rate;
     SharedPreferences sharedPreferences ;
     SharedPreferences.Editor myEdit;
-    TextView coin,user;
+    TextView user;
     View spin;
     RelativeLayout videozone,playzone,scratch,math;
     LinearLayout l1,l2,l3;
@@ -70,7 +70,7 @@ public class mainfragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         sharedPreferences = getActivity().getSharedPreferences("MySharedPref",MODE_PRIVATE);
         myEdit = sharedPreferences.edit();
-        coin=view.findViewById(R.id.coin);
+
         user=view.findViewById(R.id.user);
         videozone=view.findViewById(R.id.videozone);
         math=view.findViewById(R.id.math);
@@ -82,7 +82,6 @@ public class mainfragment extends Fragment {
         l1=view.findViewById(R.id.l1);
         l2=view.findViewById(R.id.l2);
         l3=view.findViewById(R.id.l3);
-        coin.setText(""+sharedPreferences.getInt("rewards",0));
         user.setText("Hello "+sharedPreferences.getString("first_name","name") + " "+sharedPreferences.getString("last_name","name"));
         mopinion = new Mopinion(requireActivity(), getViewLifecycleOwner());
         mopinion.event("action", formState -> Unit.INSTANCE);

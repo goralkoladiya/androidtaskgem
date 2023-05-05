@@ -70,6 +70,8 @@ public class MathQuiz extends AppCompatActivity {
     List<String> quelist;
     List<String> anslist;
     int count = 0;
+    int[] valueArray = {4, 2, 6, 8, 10, 16, 13, 20};
+    int[] valueArray2 = {0,1,2,3};
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor myEdit;
     int random = 0;
@@ -210,7 +212,9 @@ public class MathQuiz extends AppCompatActivity {
                                                         }
                                                     });
                                                 } else {
-                                                    Log.d("TAG", "The rewarded ad wasn't ready yet.");
+                                                    Intent intent = new Intent(MathQuiz.this, MathQuiz.class);
+                                                    startActivity(intent);
+                                                    finish();
                                                 }
                                             }
                                             else {
@@ -228,6 +232,67 @@ public class MathQuiz extends AppCompatActivity {
                                         @Override
                                         public void onClick(DialogInterface dialogInterface, int i) {
                                             dialogInterface.dismiss();
+                                            if(count%2==0)
+                                            {
+                                                if (rewardedAd != null) {
+                                                    Activity activityContext = MathQuiz.this;
+                                                    rewardedAd.show(activityContext, new OnUserEarnedRewardListener() {
+                                                        @Override
+                                                        public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                                                            // Handle the reward.
+                                                            Log.d("TAG", "The user earned the reward.");
+                                                            int rewardAmount = rewardItem.getAmount();
+                                                            String rewardType = rewardItem.getType();
+                                                        }
+                                                    });
+                                                    rewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                                        @Override
+                                                        public void onAdClicked() {
+                                                            // Called when a click is recorded for an ad.
+                                                            Log.d("TAG", "Ad was clicked.");
+                                                        }
+
+                                                        @Override
+                                                        public void onAdDismissedFullScreenContent() {
+                                                            // Called when ad is dismissed.
+                                                            // Set the ad reference to null so you don't show the ad a second time.
+                                                            Log.d("TAG", "Ad dismissed fullscreen content.");
+                                                            rewardedAd = null;
+                                                            Intent intent=new Intent(MathQuiz.this,MathQuiz.class);
+                                                            startActivity(intent);
+                                                            finish();
+                                                        }
+
+                                                        @Override
+                                                        public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                                            // Called when ad fails to show.
+                                                            Log.e("TAG", "Ad failed to show fullscreen content.");
+                                                            rewardedAd = null;
+                                                        }
+
+                                                        @Override
+                                                        public void onAdImpression() {
+                                                            // Called when an impression is recorded for an ad.
+                                                            Log.d("TAG", "Ad recorded an impression.");
+                                                        }
+
+                                                        @Override
+                                                        public void onAdShowedFullScreenContent() {
+                                                            // Called when ad is shown.
+                                                            Log.d("TAG", "Ad showed fullscreen content.");
+                                                        }
+                                                    });
+                                                } else {
+                                                    Intent intent = new Intent(MathQuiz.this, MathQuiz.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            }
+                                            else {
+                                                Intent intent = new Intent(MathQuiz.this, MathQuiz.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
                                         }
                                     })
                                     .show();
@@ -300,7 +365,7 @@ public class MathQuiz extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
 //        cal.add(Calendar.MINUTE, days);
-        cal.add(Calendar.HOUR, 3);
+        cal.add(Calendar.MINUTE,120);
         Date futureDate = cal.getTime();
         String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(futureDate);
         myEdit.putString("quefuturedate", currentDateandTime);

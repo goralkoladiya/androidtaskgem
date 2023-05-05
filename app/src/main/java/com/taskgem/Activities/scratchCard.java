@@ -64,11 +64,14 @@ public class scratchCard extends AppCompatActivity {
     SharedPreferences sharedPreferences ;
     SharedPreferences.Editor myEdit;
     ScratchView scratchView ;
-    int[] valueArray = {20, 2, 5, 8, 11, 14, 16, 18};
+//    int[] valueArray = {20, 2, 5, 8, 11, 14, 16, 18};
+    int[] valueArray = {4, 2, 6, 8, 10, 16, 13, 20};
+    int[] valueArray2 = {0,1,2,3};
     int rewards=0,scratchcoin=0;
     List<Integer> al;
     CardView cardView;
     RewardedAd rewardedAd;
+    int finalIndex = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,12 +113,18 @@ public class scratchCard extends AppCompatActivity {
         myEdit = sharedPreferences.edit();
         rewards=sharedPreferences.getInt("rewards",0);
         count= sharedPreferences.getInt("scratchcount",8);
-        System.out.println(sharedPreferences.getInt("scratchcount",11));
+//        System.out.println(sharedPreferences.getInt("scratchcount",11));
         System.out.println(""+count);
         scratchcredit.setVisibility(View.GONE);
         scratchcount.setText("Scratch Left : "+count);
         Collections.shuffle(al);
-        scratchcoin=al.get(0);
+        if(new Random().nextInt(10)==0){
+
+            finalIndex = new Random().nextInt(valueArray.length);
+        }else{
+            finalIndex=valueArray2[new Random().nextInt(valueArray2.length)];
+        }
+        scratchcoin=valueArray[finalIndex];
         scratchtext.setText("You've won\n"+scratchcoin);
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -211,6 +220,9 @@ public class scratchCard extends AppCompatActivity {
                                                    });
                                                } else {
                                                    Log.d("TAG", "The rewarded ad wasn't ready yet.");
+                                                   Intent intent=new Intent(scratchCard.this,scratchCard.class);
+                                                   startActivity(intent);
+                                                   finish();
                                                }
                                            }
                                            else {
@@ -324,7 +336,7 @@ public class scratchCard extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
 //        cal.add(Calendar.MINUTE, days);
-        cal.add(Calendar.HOUR, 3);
+        cal.add(Calendar.MINUTE,240);
         Date futureDate = cal.getTime();
         String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(futureDate);
         myEdit.putString("scratcfuturedate",currentDateandTime);

@@ -22,33 +22,43 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:configChanges="uiMode"
             android:name=".Activities.MathQuiz"
             android:exported="false" />
         <activity
+            android:configChanges="uiMode"
             android:name=".Activities.scratchCard"
             android:exported="false" />
         <activity
+            android:configChanges="uiMode"
             android:name=".Activities.videozone"
             android:exported="false" />
         <activity
+            android:configChanges="uiMode"
             android:name=".Activities.playzone"
             android:exported="false" />
         <activity
+            android:configChanges="uiMode"
             android:name=".Activities.spin"
             android:exported="false" />
         <activity
+            android:configChanges="uiMode"
             android:name=".Activities.transaction"
             android:exported="false" />
         <activity
+            android:configChanges="uiMode"
             android:name=".MainActivity"
             android:exported="false" />
         <activity
+            android:configChanges="uiMode"
             android:name=".Activities.RedeemActivity"
             android:exported="false" />
         <activity
+            android:configChanges="uiMode"
             android:name=".Activities.ReferActivity"
             android:exported="false" />
         <activity
+            android:configChanges="uiMode"
             android:name=".Activities.loginActivity"
             android:exported="true">
             <intent-filter>

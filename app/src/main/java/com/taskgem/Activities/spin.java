@@ -64,7 +64,8 @@ import java.util.concurrent.TimeUnit;
 public class spin extends AppCompatActivity {
     Toolbar toolbar;
     float[] angleArray = {22.5f, 67.5f, 112.5f, 157.5f, 202.5f, 247.5f, 292.5f, 337.5f};
-    int[] valueArray = {20, 2, 5, 8, 11, 14, 16, 18};
+    int[] valueArray = {4, 2, 6, 8, 10, 16, 13, 20};
+    int[] valueArray2 = {0,1,2,3};
     ImageView spinView,play;
     TextView spincount,credit,timer;
     int count=8;
@@ -73,6 +74,7 @@ public class spin extends AppCompatActivity {
     int rewards=0;
     InterstitialAd mInterstitialAd;
     RewardedAd rewardedAd;
+    int finalIndex = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,7 +162,14 @@ public class spin extends AppCompatActivity {
                 {
                     credit.setVisibility(View.GONE);
                     play.setEnabled(false);
-                    int finalIndex = new Random().nextInt(valueArray.length);
+
+                    if(new Random().nextInt(10)==0){
+
+                        finalIndex = new Random().nextInt(valueArray.length);
+                    }else{
+                        finalIndex=valueArray2[new Random().nextInt(valueArray2.length)];
+                    }
+
                     float finalRotation = (360 * 20) + angleArray[finalIndex];
                     ObjectAnimator animSpin = ObjectAnimator.ofFloat(spinView, View.ROTATION, spinView.getRotation(), finalRotation);
                     animSpin.setDuration(4000L);
@@ -256,7 +265,9 @@ public class spin extends AppCompatActivity {
                                                                 }
                                                             });
                                                         } else {
-                                                            Log.d("TAG", "The rewarded ad wasn't ready yet.");
+                                                            Intent intent=new Intent(spin.this,spin.class);
+                                                            startActivity(intent);
+                                                            finish();
                                                         }
                                                     }
                                                     else {
@@ -361,7 +372,7 @@ public class spin extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
 //        cal.add(Calendar.MINUTE, days);
-        cal.add(Calendar.HOUR,3);
+        cal.add(Calendar.MINUTE,180);
         Date futureDate = cal.getTime();
         String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(futureDate);
         myEdit.putString("futuredate",currentDateandTime);

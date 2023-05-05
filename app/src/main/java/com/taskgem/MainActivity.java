@@ -88,16 +88,7 @@ public class MainActivity extends AppCompatActivity implements
     FirebaseAuth mFirebaseAuth;
     GoogleSignInClient mGoogleSignInClient;
     InterstitialAd mInterstitialAd;
-    public static void setWindowFlag(Activity activity, final int bits, boolean on) {
-        Window win = activity.getWindow();
-        WindowManager.LayoutParams winParams = win.getAttributes();
-        if (on) {
-            winParams.flags |= bits;
-        } else {
-            winParams.flags &= ~bits;
-        }
-        win.setAttributes(winParams);
-    }
+    TextView coin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,13 +98,14 @@ public class MainActivity extends AppCompatActivity implements
         sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         myEdit = sharedPreferences.edit();
         drawerLayout = findViewById(R.id.drawer);
-
+        coin=findViewById(R.id.coin);
         logoimg = findViewById(R.id.logoimg);
         navigationView = findViewById(R.id.navigation);
         toolbar = findViewById(R.id.toolbar);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         actionBarDrawerToggle.syncState();
         toolbar.setNavigationIcon(R.drawable.threedot);
+
         navigationView.setItemIconTintList(null);
         mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -168,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements
         NetworkInfo netInfo = mgr.getActiveNetworkInfo();
         user.setText(sharedPreferences.getString("email", "user"));
         email.setText(sharedPreferences.getString("first_name", "name") + " " + sharedPreferences.getString("last_name", "name"));
+        coin.setText(""+sharedPreferences.getInt("rewards",0));
         Mopinion.Companion.initialise(this, "@FORM_KEY", true);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

@@ -29,7 +29,7 @@ import org.json.JSONObject;
 public class ReferActivity extends AppCompatActivity {
     Toolbar toolbar;
     TextView invite,invitees;
-    ImageView share,whatsapp,telegram,fb;
+    ImageView share,whatsapp,telegram,fb,invitenow;
     SharedPreferences sharedPreferences ;
     SharedPreferences.Editor myEdit;
     @Override
@@ -39,6 +39,7 @@ public class ReferActivity extends AppCompatActivity {
         toolbar=findViewById(R.id.toolbar);
         share=findViewById(R.id.share);
         whatsapp=findViewById(R.id.whatsapp);
+        invitenow=findViewById(R.id.invitenow);
         telegram=findViewById(R.id.telegram);
         fb=findViewById(R.id.fb);
 
@@ -94,11 +95,17 @@ public class ReferActivity extends AppCompatActivity {
 // Add the request to the RequestQueue.
         queue.add(stringRequest);
 
-
         invite.setText("INVITE CODE: "+sharedPreferences.getString("token","ABCD"));
         invitees.setText("TOTAL INVITES - 0");
-
         share.setOnClickListener(view -> {
+            String msg="Hey, we’re happy to invite you to join our referral program and share it with your friends to get more rewards" +
+                    "https://play.google.com/store/apps/details?id=com.taskgem";
+            Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);
+            txtIntent.setType("text/plain");
+            txtIntent.putExtra(android.content.Intent.EXTRA_TEXT,msg);
+            startActivity(Intent.createChooser(txtIntent ,"Share"));
+        });
+        invitenow.setOnClickListener(view -> {
             String msg="Hey, we’re happy to invite you to join our referral program and share it with your friends to get more rewards" +
                     "https://play.google.com/store/apps/details?id=com.taskgem";
             Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);

@@ -12,6 +12,7 @@
         android:orientation="horizontal"
         android:layout_height="wrap_content">
         <TextView
+            android:singleLine="true"
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginLeft="@dimen/_15sdp"
             android:fontFamily="@font/semibold"
@@ -21,44 +22,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hello User" />
-        <TextView
-            android:layout_toRightOf="@id/user"
-            android:layout_toLeftOf="@id/frame"
-            android:layout_width = "match_parent"
-            android:layout_height = "wrap_content" />
-        <RelativeLayout
-            android:layout_alignParentEnd="true"
-            android:id="@+id/frame"
-            android:layout_margin="@dimen/_15sdp"
-            android:background="@drawable/rect"
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_30sdp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-                <ImageView
-                    android:gravity="center"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:src="@drawable/coin"
-                    />
-                <TextView
-                    android:layout_marginLeft="0dp"
-                    android:paddingLeft="0dp"
-                    android:id="@+id/coin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/regular"
-                    android:text="120000"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp"/>
-            </LinearLayout>
+<!--        <RelativeLayout-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:id="@+id/frame"-->
+<!--            android:layout_margin="@dimen/_15sdp"-->
+<!--            android:background="@drawable/rect"-->
+<!--            android:layout_width="@dimen/_80sdp"-->
+<!--            android:layout_height="@dimen/_30sdp">-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:orientation="horizontal">-->
+<!--                <ImageView-->
+<!--                    android:gravity="center"-->
+<!--                    android:layout_marginLeft="@dimen/_10sdp"-->
+<!--                    android:layout_width="@dimen/_20sdp"-->
+<!--                    android:layout_height="@dimen/_20sdp"-->
+<!--                    android:src="@drawable/coin"-->
+<!--                    />-->
+<!--                <TextView-->
+<!--                    android:layout_marginLeft="0dp"-->
+<!--                    android:paddingLeft="0dp"-->
+<!--                    android:id="@+id/coin"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/regular"-->
+<!--                    android:text="120000"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="@dimen/_12sdp"/>-->
+<!--            </LinearLayout>-->
 
 
-        </RelativeLayout>
+<!--        </RelativeLayout>-->
     </RelativeLayout>
     <ScrollView
         android:layout_below="@id/r"
@@ -89,7 +85,6 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:text="Top Offers"/>
-
          <LinearLayout
              android:id="@+id/l1"
              android:layout_margin="@dimen/_15sdp"
@@ -133,7 +128,6 @@
                  android:layout_height="@dimen/_15sdp"
                  android:src="@drawable/arraow"/>
          </LinearLayout>
-
          <LinearLayout
              android:id="@+id/l2"
              android:layout_marginHorizontal="@dimen/_15sdp"
@@ -229,7 +223,6 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:text="Play For Rewards"/>
-
          <LinearLayout
              android:layout_width="match_parent"
              android:layout_height="match_parent"
@@ -374,6 +367,7 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:text="Other"/>
+
          <LinearLayout
              android:layout_width="match_parent"
              android:orientation="horizontal"
@@ -382,18 +376,17 @@
                  android:id="@+id/telegram"
                  android:layout_marginHorizontal="@dimen/_10sdp"
                  android:layout_width="match_parent"
-                 android:layout_height="match_parent"
+                 android:layout_height="@dimen/_75sdp"
                  android:layout_weight="1"
                  android:src="@drawable/telegram"/>
              <ImageView
                  android:id="@+id/rate"
-                 android:layout_marginRight="@dimen/_10sdp"
+                 android:layout_marginHorizontal="@dimen/_10sdp"
                  android:layout_width="match_parent"
-                 android:layout_height="match_parent"
+                 android:layout_height="@dimen/_75sdp"
                  android:layout_weight="1"
                  android:src="@drawable/rate"/>
          </LinearLayout>
-
      </LinearLayout>
 
  </ScrollView>

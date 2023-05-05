@@ -27,19 +27,15 @@
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/group7">
-        <item android:id="@+id/rateus" android:title="Rate Us" android:icon="@drawable/rate"/>
+        <item android:id="@+id/rateus" android:title="Rate Us" android:icon="@drawable/rateus"/>
     </group>
-
-
-
-
-
-
-
-
     <item
         android:title=""
         android:enabled="false" >
+    </item>
+    <item
+        android:title=""
+        android:enabled="false">
     </item>
     <item android:title="Log Out" android:id="@+id/logout" android:icon="@drawable/logout"/>
 </menu>
