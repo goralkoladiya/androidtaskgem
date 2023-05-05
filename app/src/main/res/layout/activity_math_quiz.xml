@@ -72,6 +72,17 @@
                        android:text="hello"
                        android:gravity="center"
                        android:visibility="gone"
+                       android:id="@+id/quecredit"
+                       android:layout_width="match_parent"
+                       android:layout_marginHorizontal="@dimen/_30sdp"
+                       android:layout_height="@dimen/_30sdp"
+                       android:background="@drawable/creditdialog"/>
+                   <TextView
+                       android:textColor="@color/white"
+                       android:fontFamily="@font/semibold"
+                       android:text="hello"
+                       android:gravity="center"
+                       android:visibility="gone"
                        android:id="@+id/timer"
                        android:layout_width="match_parent"
                        android:layout_marginHorizontal="@dimen/_30sdp"
