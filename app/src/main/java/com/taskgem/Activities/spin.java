@@ -64,7 +64,7 @@ import java.util.concurrent.TimeUnit;
 public class spin extends AppCompatActivity {
     Toolbar toolbar;
     float[] angleArray = {22.5f, 67.5f, 112.5f, 157.5f, 202.5f, 247.5f, 292.5f, 337.5f};
-    int[] valueArray = {4, 2, 6, 8, 10, 16, 13, 20};
+    int[] valueArray = {2, 4, 6, 8, 10, 13, 16, 20};
     int[] valueArray2 = {0,1,2,3};
     ImageView spinView,play;
     TextView spincount,credit,timer;
@@ -146,6 +146,7 @@ public class spin extends AppCompatActivity {
         spinView.setRotation(angleArray[new Random().nextInt(angleArray.length)]);
         credit.setVisibility(View.GONE);
         spincount.setText("Spin Left : "+count);
+//        myEdit.clear().commit();
         startTimer();
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -372,7 +373,7 @@ public class spin extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
 //        cal.add(Calendar.MINUTE, days);
-        cal.add(Calendar.MINUTE,180);
+        cal.add(Calendar.HOUR_OF_DAY,3);
         Date futureDate = cal.getTime();
         String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(futureDate);
         myEdit.putString("futuredate",currentDateandTime);

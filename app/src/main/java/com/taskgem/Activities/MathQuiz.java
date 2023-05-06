@@ -476,7 +476,7 @@ public class MathQuiz extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
 //        cal.add(Calendar.MINUTE, days);
-        cal.add(Calendar.MINUTE,120);
+        cal.add(Calendar.HOUR_OF_DAY,2);
         Date futureDate = cal.getTime();
         String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(futureDate);
         myEdit.putString("quefuturedate", currentDateandTime);

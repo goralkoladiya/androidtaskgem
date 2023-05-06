@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -53,6 +54,7 @@ import com.pollfish.callback.PollfishSurveyReceivedListener;
 import com.pollfish.callback.PollfishUserNotEligibleListener;
 import com.pollfish.callback.PollfishUserRejectedSurveyListener;
 import com.pollfish.callback.SurveyInfo;
+import com.rajat.pdfviewer.PdfViewerActivity;
 import com.taskgem.Activities.RedeemActivity;
 import com.taskgem.Activities.ReferActivity;
 import com.taskgem.Activities.loginActivity;
@@ -100,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements
         drawerLayout = findViewById(R.id.drawer);
         coin=findViewById(R.id.coin);
         logoimg = findViewById(R.id.logoimg);
+
         navigationView = findViewById(R.id.navigation);
         toolbar = findViewById(R.id.toolbar);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
@@ -138,18 +141,14 @@ public class MainActivity extends AppCompatActivity implements
                         mInterstitialAd = null;
                     }
                 });
-
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         getSupportFragmentManager().beginTransaction().replace(R.id.linear, new mainfragment()).commit();
-
         View view = navigationView.getHeaderView(0);
         user = view.findViewById(R.id.user);
         email = view.findViewById(R.id.email);
         profile = view.findViewById(R.id.profile);
-
         initPollfish();
         BitLabs.INSTANCE.init(this, "6d283b86-f543-4e3c-90b9-68e24e7b2744", sharedPreferences.getString("email", "user"));
-
         Glide
                 .with(this)
                 .load(sharedPreferences.getString("profile", "user"))
@@ -165,7 +164,6 @@ public class MainActivity extends AppCompatActivity implements
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                 if (item.getItemId() == R.id.refer) {
                     if (netInfo != null) {
                         if (netInfo.isConnectedOrConnecting()) {
@@ -395,6 +393,17 @@ public class MainActivity extends AppCompatActivity implements
                 }
                 if (item.getItemId() == R.id.rate) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.taskgem")));
+                }if (item.getItemId() == R.id.rateus) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.taskgem")));
+                }
+                if (item.getItemId() == R.id.support) {
+                    Intent intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("plain/text");
+                    intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "taskgemapp@gmail.com" });
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "TaskGem Support");
+                    intent.putExtra(Intent.EXTRA_TEXT, "Hello TaskGem");
+                    startActivity(Intent.createChooser(intent, ""));
+
                 }
                 if (item.getItemId() == R.id.logout) {
                     mFirebaseAuth.signOut();
@@ -407,19 +416,30 @@ public class MainActivity extends AppCompatActivity implements
                     finish();
 
                 }
+                if(item.getItemId()==R.id.privacy)
+                {
+                    startActivity(
+                            PdfViewerActivity.Companion.launchPdfFromPath(
+                                    MainActivity.this,
+                                    "privacy.pdf",
+                                    "Privacy Policy",
+                                    "assets",
+                                    false,
+                                    true
+                            )
+                    );
+                }
                 drawerLayout.closeDrawers();
                 return false;
             }
         });
     }
-
     private void initPollfish() {
         Params params = new Params.Builder("3cc67a3f-e1fb-4ab0-887f-a143f8871be6")
                 .rewardMode(true)
                 .build();
         Pollfish.initWith(this, params);
     }
-
     @Override
     public void onPollfishSurveyCompleted(@NotNull SurveyInfo surveyInfo) {
 //        coinsBtn.setVisibility(View.GONE);

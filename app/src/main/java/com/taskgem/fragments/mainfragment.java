@@ -82,10 +82,9 @@ public class mainfragment extends Fragment {
         l1=view.findViewById(R.id.l1);
         l2=view.findViewById(R.id.l2);
         l3=view.findViewById(R.id.l3);
-        user.setText("Hello "+sharedPreferences.getString("first_name","name") + " "+sharedPreferences.getString("last_name","name"));
+        user.setText("Hello "+sharedPreferences.getString("first_name","name") + " "+sharedPreferences.getString("last_name","name")+" \uD83D\uDC4B");
         mopinion = new Mopinion(requireActivity(), getViewLifecycleOwner());
         mopinion.event("action", formState -> Unit.INSTANCE);
-
         MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -343,19 +342,21 @@ public class mainfragment extends Fragment {
 
         });
         telegram.setOnClickListener(view1 -> {
-            boolean isAppInstalled = appInstalledOrNot("org.telegram.messenger");
-            if(isAppInstalled)
-            {
-                String msg="Hey, we’re happy to invite you to join our referral program and share it with your friends to get more rewards" +
-                        "https://play.google.com/store/apps/details?id=com.taskgem";
-                Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);
-                txtIntent .setType("text/plain");
-                txtIntent.setPackage("org.telegram.messenger");
-                txtIntent .putExtra(android.content.Intent.EXTRA_TEXT,msg);
-                startActivity(Intent.createChooser(txtIntent ,"Share"));
-            }else {
-                Toast.makeText(getContext(), "Application is not currently installed.", Toast.LENGTH_SHORT).show();
+            Intent intent;
+            try {
+                try { // check for telegram app
+                    getContext().getPackageManager().getPackageInfo("org.telegram.messenger", 0);
+                } catch (PackageManager.NameNotFoundException e) {
+                    // check for telegram X app
+                    getContext().getPackageManager().getPackageInfo("org.thunderdog.challegram", 0);
+                }
+                // set app Uri
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tg://resolve?domain=taskgem"));
+            } catch (PackageManager.NameNotFoundException e) {
+                // set browser URI
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.telegram.me/taskgem"));
             }
+            startActivity(intent);
         });
         rate.setOnClickListener(view1 -> {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.taskgem")));

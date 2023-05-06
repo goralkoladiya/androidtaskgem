@@ -52,4 +52,5 @@ dependencies {
     implementation 'com.github.BitBurst-GmbH.bitlabs-android-library:core:3.1.1'
     implementation 'com.surveymonkey:surveymonkey-android-sdk:3.0.2'
     implementation 'com.github.mopinion-com:native-android-sdk:1.0.6'
+    implementation 'com.github.afreakyelf:Pdf-Viewer:v1.0.7'
 }

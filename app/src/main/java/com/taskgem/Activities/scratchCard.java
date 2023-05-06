@@ -336,7 +336,7 @@ public class scratchCard extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
 //        cal.add(Calendar.MINUTE, days);
-        cal.add(Calendar.MINUTE,240);
+        cal.add(Calendar.HOUR_OF_DAY,4);
         Date futureDate = cal.getTime();
         String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(futureDate);
         myEdit.putString("scratcfuturedate",currentDateandTime);

@@ -19,11 +19,11 @@
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/group5">
-        <item android:title="Support" android:icon="@drawable/support"/>
+        <item android:id="@+id/support" android:title="Support" android:icon="@drawable/support"/>
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/group6">
-        <item android:title="Privacy Policy" android:icon="@drawable/privacy"/>
+        <item android:id="@+id/privacy" android:title="Privacy Policy" android:icon="@drawable/privacy"/>
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/group7">
