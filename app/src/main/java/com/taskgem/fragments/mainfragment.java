@@ -39,6 +39,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.mopinion.mopinion_android_sdk.ui.mopinion.Mopinion;
 import com.taskgem.Activities.ReferActivity;
+import com.taskgem.Activities.spin;
 import com.taskgem.MainActivity;
 import com.taskgem.R;
 
@@ -155,7 +156,7 @@ public class mainfragment extends Fragment {
                             }
                         });
                     } else {
-                        Log.d("TAG", "The interstitial ad wasn't ready yet.");
+                        Toast.makeText(getActivity(), "No internet connection please connnect Internet", Toast.LENGTH_SHORT).show();
                     }
                 }else {
                     Intent intent=new Intent(getActivity(), com.taskgem.Activities.spin.class);

@@ -156,159 +156,172 @@ public class spin extends AppCompatActivity {
         AdView mAdView = findViewById(R.id.adView);
         mAdView.loadAd(adRequest);
         System.out.println(sharedPreferences.getString("futuredate","0"));
+
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(count!=0)
-                {
-                    credit.setVisibility(View.GONE);
-                    play.setEnabled(false);
+                if (netInfo != null) {
+                    if (netInfo.isConnectedOrConnecting()) {
+                        if(count!=0)
+                        {
+                            credit.setVisibility(View.GONE);
+                            play.setEnabled(false);
 
-                    if(new Random().nextInt(10)==0){
+                            if(new Random().nextInt(10)==0){
 
-                        finalIndex = new Random().nextInt(valueArray.length);
-                    }else{
-                        finalIndex=valueArray2[new Random().nextInt(valueArray2.length)];
-                    }
-
-                    float finalRotation = (360 * 20) + angleArray[finalIndex];
-                    ObjectAnimator animSpin = ObjectAnimator.ofFloat(spinView, View.ROTATION, spinView.getRotation(), finalRotation);
-                    animSpin.setDuration(4000L);
-                    animSpin.setInterpolator(new DecelerateInterpolator());
-                    animSpin.addListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
-                            spinView.setRotation(angleArray[finalIndex]);
-                            count=count-1;
-                            myEdit.putInt("count",count);
-                            myEdit.commit();
-                            spincount.setText("Spin Left : "+count);
-                            credit.setVisibility(View.VISIBLE);
-                            credit.setText("+"+valueArray[finalIndex]+" Coins Credited");
-                            rewards=rewards+valueArray[finalIndex];
-                            myEdit.putInt("rewards",rewards);
-                            myEdit.commit();
-                            Toast.makeText(spin.this, "" + valueArray[finalIndex], Toast.LENGTH_SHORT).show();
-                            //remove
-//                            play.setEnabled(true);
-                            if(count==0)
-                            {
-                                timer.setVisibility(View.VISIBLE);
-                                Date currentTime = new Date();
-                                String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(currentTime);
-                                System.out.println(currentDateandTime);
-                                getFutureDate(currentTime,2);
-                                startTimer();
+                                finalIndex = new Random().nextInt(valueArray.length);
+                            }else{
+                                finalIndex=valueArray2[new Random().nextInt(valueArray2.length)];
                             }
-                            RequestQueue queue = Volley.newRequestQueue(spin.this);
-                            String url = "http://taskgem.in/taskgem/admin/rewards-insert-api.php";
+
+                            float finalRotation = (360 * 20) + angleArray[finalIndex];
+                            ObjectAnimator animSpin = ObjectAnimator.ofFloat(spinView, View.ROTATION, spinView.getRotation(), finalRotation);
+                            animSpin.setDuration(4000L);
+                            animSpin.setInterpolator(new DecelerateInterpolator());
+                            animSpin.addListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    super.onAnimationEnd(animation);
+                                    spinView.setRotation(angleArray[finalIndex]);
+                                    count=count-1;
+                                    myEdit.putInt("count",count);
+                                    myEdit.commit();
+                                    spincount.setText("Spin Left : "+count);
+                                    credit.setVisibility(View.VISIBLE);
+                                    credit.setText("+"+valueArray[finalIndex]+" Coins Credited");
+                                    rewards=rewards+valueArray[finalIndex];
+                                    myEdit.putInt("rewards",rewards);
+                                    myEdit.commit();
+                                    Toast.makeText(spin.this, "" + valueArray[finalIndex], Toast.LENGTH_SHORT).show();
+                                    //remove
+//                            play.setEnabled(true);
+                                    if(count==0)
+                                    {
+                                        timer.setVisibility(View.VISIBLE);
+                                        Date currentTime = new Date();
+                                        String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(currentTime);
+                                        System.out.println(currentDateandTime);
+                                        getFutureDate(currentTime,2);
+                                        startTimer();
+                                    }
+                                    RequestQueue queue = Volley.newRequestQueue(spin.this);
+                                    String url = "http://taskgem.in/taskgem/admin/rewards-insert-api.php";
 
 // Request a string response from the provided URL.
-                            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                                    new Response.Listener<String>() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            System.out.println(response);
-                                            try {
-                                                JSONObject jsonObject=new JSONObject(response);
-                                                if(jsonObject.getBoolean("status"))
-                                                {
-                                                    play.setEnabled(true);
-                                                    if(count%2==0)
-                                                    {
-                                                        if (rewardedAd != null) {
-                                                            Activity activityContext = spin.this;
-                                                            rewardedAd.show(activityContext, new OnUserEarnedRewardListener() {
-                                                                @Override
-                                                                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                                                                    // Handle the reward.
-                                                                    Log.d("TAG", "The user earned the reward.");
-                                                                    int rewardAmount = rewardItem.getAmount();
-                                                                    String rewardType = rewardItem.getType();
-                                                                }
-                                                            });
-                                                            rewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                                                                @Override
-                                                                public void onAdClicked() {
-                                                                    // Called when a click is recorded for an ad.
-                                                                    Log.d(TAG, "Ad was clicked.");
-                                                                }
+                                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                                            new Response.Listener<String>() {
+                                                @Override
+                                                public void onResponse(String response) {
+                                                    System.out.println(response);
+                                                    try {
+                                                        JSONObject jsonObject=new JSONObject(response);
+                                                        if(jsonObject.getBoolean("status"))
+                                                        {
+                                                            play.setEnabled(true);
+                                                            if(count%2==0)
+                                                            {
+                                                                if (rewardedAd != null) {
+                                                                    Activity activityContext = spin.this;
+                                                                    rewardedAd.show(activityContext, new OnUserEarnedRewardListener() {
+                                                                        @Override
+                                                                        public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                                                                            // Handle the reward.
+                                                                            Log.d("TAG", "The user earned the reward.");
+                                                                            int rewardAmount = rewardItem.getAmount();
+                                                                            String rewardType = rewardItem.getType();
+                                                                        }
+                                                                    });
+                                                                    rewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                                                        @Override
+                                                                        public void onAdClicked() {
+                                                                            // Called when a click is recorded for an ad.
+                                                                            Log.d(TAG, "Ad was clicked.");
+                                                                        }
 
-                                                                @Override
-                                                                public void onAdDismissedFullScreenContent() {
-                                                                    // Called when ad is dismissed.
-                                                                    // Set the ad reference to null so you don't show the ad a second time.
-                                                                    Log.d(TAG, "Ad dismissed fullscreen content.");
-                                                                    rewardedAd = null;
+                                                                        @Override
+                                                                        public void onAdDismissedFullScreenContent() {
+                                                                            // Called when ad is dismissed.
+                                                                            // Set the ad reference to null so you don't show the ad a second time.
+                                                                            Log.d(TAG, "Ad dismissed fullscreen content.");
+                                                                            rewardedAd = null;
+                                                                            Intent intent=new Intent(spin.this,spin.class);
+                                                                            startActivity(intent);
+                                                                            finish();
+                                                                        }
+
+                                                                        @Override
+                                                                        public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                                                            // Called when ad fails to show.
+                                                                            Log.e(TAG, "Ad failed to show fullscreen content.");
+                                                                            rewardedAd = null;
+                                                                        }
+
+                                                                        @Override
+                                                                        public void onAdImpression() {
+                                                                            // Called when an impression is recorded for an ad.
+                                                                            Log.d(TAG, "Ad recorded an impression.");
+                                                                        }
+
+                                                                        @Override
+                                                                        public void onAdShowedFullScreenContent() {
+                                                                            // Called when ad is shown.
+                                                                            Log.d(TAG, "Ad showed fullscreen content.");
+                                                                        }
+                                                                    });
+                                                                } else {
                                                                     Intent intent=new Intent(spin.this,spin.class);
                                                                     startActivity(intent);
                                                                     finish();
                                                                 }
-
-                                                                @Override
-                                                                public void onAdFailedToShowFullScreenContent(AdError adError) {
-                                                                    // Called when ad fails to show.
-                                                                    Log.e(TAG, "Ad failed to show fullscreen content.");
-                                                                    rewardedAd = null;
-                                                                }
-
-                                                                @Override
-                                                                public void onAdImpression() {
-                                                                    // Called when an impression is recorded for an ad.
-                                                                    Log.d(TAG, "Ad recorded an impression.");
-                                                                }
-
-                                                                @Override
-                                                                public void onAdShowedFullScreenContent() {
-                                                                    // Called when ad is shown.
-                                                                    Log.d(TAG, "Ad showed fullscreen content.");
-                                                                }
-                                                            });
-                                                        } else {
-                                                            Intent intent=new Intent(spin.this,spin.class);
-                                                            startActivity(intent);
-                                                            finish();
+                                                            }
+                                                            else {
+                                                                Intent intent=new Intent(spin.this,spin.class);
+                                                                startActivity(intent);
+                                                                finish();
+                                                            }
                                                         }
+                                                    } catch (JSONException e) {
+                                                        throw new RuntimeException(e);
                                                     }
-                                                    else {
-                                                        Intent intent=new Intent(spin.this,spin.class);
-                                                        startActivity(intent);
-                                                        finish();
-                                                    }
-                                                }
-                                            } catch (JSONException e) {
-                                                throw new RuntimeException(e);
-                                            }
 
-                                        }
-                                    },
-                                    new Response.ErrorListener() {
+                                                }
+                                            },
+                                            new Response.ErrorListener() {
+                                                @Override
+                                                public void onErrorResponse(VolleyError error) {
+                                                    System.out.println(error.getMessage());
+                                                }
+                                            }){
+                                        @Nullable
                                         @Override
-                                        public void onErrorResponse(VolleyError error) {
-                                            System.out.println(error.getMessage());
+                                        protected Map<String, String> getParams() throws AuthFailureError {
+                                            Map<String,String> params = new HashMap<String, String>();
+                                            params.put("uid", sharedPreferences.getString("uid","1"));
+                                            params.put("rewards",""+valueArray[finalIndex] );
+                                            params.put("reason", "credited via spin");
+                                            return params;
                                         }
-                                    }){
-                                @Nullable
-                                @Override
-                                protected Map<String, String> getParams() throws AuthFailureError {
-                                    Map<String,String> params = new HashMap<String, String>();
-                                    params.put("uid", sharedPreferences.getString("uid","1"));
-                                    params.put("rewards",""+valueArray[finalIndex] );
-                                    params.put("reason", "credited via spin");
-                                    return params;
-                                }
-                            };
+                                    };
 
 // Add the request to the RequestQueue.
-                            queue.add(stringRequest);
+                                    queue.add(stringRequest);
+                                }
+                            });
+                            animSpin.start();
                         }
-                    });
-                    animSpin.start();
+                        else {
+                            Toast.makeText(spin.this, "Spin Limit Over Try Again Later...", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else
+                    {
+                        Toast.makeText(spin.this, "No internet connection please connnect Internet", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
-                    Toast.makeText(spin.this, "Spin Limit Over Try Again Later...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(spin.this, "No internet connection please connnect Internet", Toast.LENGTH_SHORT).show();
                 }
+
 
 
 
@@ -334,9 +347,11 @@ public class spin extends AppCompatActivity {
         new CountDownTimer(getTimeDifference(), 1000) {
             public void onTick(long millisUntilFinished) {
 
+//                val hours: Long = millisUntilFinished / (60 * 60 * 1000) % 24
+                long hour = millisUntilFinished / (60 * 60 * 1000) % 24;
                 long minute = millisUntilFinished / (60 * 1000) % 60;
                 long second = millisUntilFinished / 1000 % 60;
-                timer.setText(String.format("%02d:%02d", minute, second));
+                timer.setText(String.format("%02d:%02d:%02d", hour,minute, second));
             }
 
             public void onFinish() {
@@ -373,7 +388,7 @@ public class spin extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
 //        cal.add(Calendar.MINUTE, days);
-        cal.add(Calendar.HOUR_OF_DAY,3);
+        cal.add(Calendar.HOUR,3);
         Date futureDate = cal.getTime();
         String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(futureDate);
         myEdit.putString("futuredate",currentDateandTime);

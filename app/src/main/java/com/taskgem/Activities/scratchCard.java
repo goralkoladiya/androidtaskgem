@@ -7,8 +7,11 @@ import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -114,6 +117,8 @@ public class scratchCard extends AppCompatActivity {
         rewards=sharedPreferences.getInt("rewards",0);
         count= sharedPreferences.getInt("scratchcount",8);
 //        System.out.println(sharedPreferences.getInt("scratchcount",11));
+        ConnectivityManager mgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = mgr.getActiveNetworkInfo();
         System.out.println(""+count);
         scratchcredit.setVisibility(View.GONE);
         scratchcount.setText("Scratch Left : "+count);
@@ -136,133 +141,145 @@ public class scratchCard extends AppCompatActivity {
         scratchView.setRevealListener(new ScratchView.IRevealListener() {
             @Override
             public void onRevealed(ScratchView scratchView) {
-                if(count!=0)
-                {
-                    scratchcredit.setVisibility(View.GONE);
+                if (netInfo != null) {
+                    if (netInfo.isConnectedOrConnecting()) {
+                        if(count!=0)
+                        {
+                            scratchcredit.setVisibility(View.GONE);
 //                    play.setEnabled(false);
-                    count=count-1;
-                    myEdit.putInt("scratchcount",count);
-                    myEdit.commit();
-                    scratchcount.setText("Scratch Left : "+count);
-                    scratchcredit.setVisibility(View.VISIBLE);
-                    scratchcredit.setText("+"+scratchcoin+" Coins Credited");
-                    rewards=rewards+scratchcoin;
-                    myEdit.putInt("rewards",rewards);
-                    myEdit.commit();
-                    if(count==0)
-                    {
-                        scratchcredit.setVisibility(View.VISIBLE);
+                            count=count-1;
+                            myEdit.putInt("scratchcount",count);
+                            myEdit.commit();
+                            scratchcount.setText("Scratch Left : "+count);
+                            scratchcredit.setVisibility(View.VISIBLE);
+                            scratchcredit.setText("+"+scratchcoin+" Coins Credited");
+                            rewards=rewards+scratchcoin;
+                            myEdit.putInt("rewards",rewards);
+                            myEdit.commit();
+                            if(count==0)
+                            {
+                                scratchcredit.setVisibility(View.VISIBLE);
 //                        timer.setVisibility(View.VISIBLE);
-                        Date currentTime = new Date();
-                        String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(currentTime);
-                        System.out.println(currentDateandTime);
-                        getFutureDate(currentTime,2);
-                    }
-                    scratchView.setVisibility(View.GONE);
-                    RequestQueue queue = Volley.newRequestQueue(scratchCard.this);
-                    String url = "http://taskgem.in/taskgem/admin/rewards-insert-api.php";
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                            new Response.Listener<String>() {
-                                @Override
-                                public void onResponse(String response) {
-                                    System.out.println(response);
-                                    try {
-                                        JSONObject jsonObject=new JSONObject(response);
-                                        if(jsonObject.getBoolean("status"))
-                                        {
-                                           Thread.sleep(1000);
-                                           if(count%2==0)
-                                           {
-                                               if (rewardedAd != null) {
-                                                   Activity activityContext = scratchCard.this;
-                                                   rewardedAd.show(activityContext, new OnUserEarnedRewardListener() {
-                                                       @Override
-                                                       public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                                                           // Handle the reward.
-                                                           Log.d("TAG", "The user earned the reward.");
-                                                           int rewardAmount = rewardItem.getAmount();
-                                                           String rewardType = rewardItem.getType();
-                                                       }
-                                                   });
-                                                   rewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-                                                       @Override
-                                                       public void onAdClicked() {
-                                                           // Called when a click is recorded for an ad.
-                                                           Log.d(TAG, "Ad was clicked.");
-                                                       }
+                                Date currentTime = new Date();
+                                String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(currentTime);
+                                System.out.println(currentDateandTime);
+                                getFutureDate(currentTime,2);
+                            }
+                            scratchView.setVisibility(View.GONE);
+                            RequestQueue queue = Volley.newRequestQueue(scratchCard.this);
+                            String url = "http://taskgem.in/taskgem/admin/rewards-insert-api.php";
+                            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                                    new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String response) {
+                                            System.out.println(response);
+                                            try {
+                                                JSONObject jsonObject=new JSONObject(response);
+                                                if(jsonObject.getBoolean("status"))
+                                                {
+                                                    Thread.sleep(1000);
+                                                    if(count%2==0)
+                                                    {
+                                                        if (rewardedAd != null) {
+                                                            Activity activityContext = scratchCard.this;
+                                                            rewardedAd.show(activityContext, new OnUserEarnedRewardListener() {
+                                                                @Override
+                                                                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                                                                    // Handle the reward.
+                                                                    Log.d("TAG", "The user earned the reward.");
+                                                                    int rewardAmount = rewardItem.getAmount();
+                                                                    String rewardType = rewardItem.getType();
+                                                                }
+                                                            });
+                                                            rewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+                                                                @Override
+                                                                public void onAdClicked() {
+                                                                    // Called when a click is recorded for an ad.
+                                                                    Log.d(TAG, "Ad was clicked.");
+                                                                }
 
-                                                       @Override
-                                                       public void onAdDismissedFullScreenContent() {
-                                                           // Called when ad is dismissed.
-                                                           // Set the ad reference to null so you don't show the ad a second time.
-                                                           Log.d(TAG, "Ad dismissed fullscreen content.");
-                                                           rewardedAd = null;
-                                                           Intent intent=new Intent(scratchCard.this,scratchCard.class);
-                                                           startActivity(intent);
-                                                           finish();
-                                                       }
-                                                       @Override
-                                                       public void onAdFailedToShowFullScreenContent(AdError adError) {
-                                                           // Called when ad fails to show.
-                                                           Log.e(TAG, "Ad failed to show fullscreen content.");
-                                                           rewardedAd = null;
-                                                       }
-                                                       @Override
-                                                       public void onAdImpression() {
-                                                           // Called when an impression is recorded for an ad.
-                                                           Log.d(TAG, "Ad recorded an impression.");
-                                                       }
-                                                       @Override
-                                                       public void onAdShowedFullScreenContent() {
-                                                           // Called when ad is shown.
-                                                           Log.d(TAG, "Ad showed fullscreen content.");
-                                                       }
-                                                   });
-                                               } else {
-                                                   Log.d("TAG", "The rewarded ad wasn't ready yet.");
-                                                   Intent intent=new Intent(scratchCard.this,scratchCard.class);
-                                                   startActivity(intent);
-                                                   finish();
-                                               }
-                                           }
-                                           else {
-                                               Intent intent=new Intent(scratchCard.this,scratchCard.class);
-                                               startActivity(intent);
-                                               finish();
-                                           }
+                                                                @Override
+                                                                public void onAdDismissedFullScreenContent() {
+                                                                    // Called when ad is dismissed.
+                                                                    // Set the ad reference to null so you don't show the ad a second time.
+                                                                    Log.d(TAG, "Ad dismissed fullscreen content.");
+                                                                    rewardedAd = null;
+                                                                    Intent intent=new Intent(scratchCard.this,scratchCard.class);
+                                                                    startActivity(intent);
+                                                                    finish();
+                                                                }
+                                                                @Override
+                                                                public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                                                    // Called when ad fails to show.
+                                                                    Log.e(TAG, "Ad failed to show fullscreen content.");
+                                                                    rewardedAd = null;
+                                                                }
+                                                                @Override
+                                                                public void onAdImpression() {
+                                                                    // Called when an impression is recorded for an ad.
+                                                                    Log.d(TAG, "Ad recorded an impression.");
+                                                                }
+                                                                @Override
+                                                                public void onAdShowedFullScreenContent() {
+                                                                    // Called when ad is shown.
+                                                                    Log.d(TAG, "Ad showed fullscreen content.");
+                                                                }
+                                                            });
+                                                        } else {
+                                                            Log.d("TAG", "The rewarded ad wasn't ready yet.");
+                                                            Intent intent=new Intent(scratchCard.this,scratchCard.class);
+                                                            startActivity(intent);
+                                                            finish();
+                                                        }
+                                                    }
+                                                    else {
+                                                        Intent intent=new Intent(scratchCard.this,scratchCard.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    }
 //                                        play.setEnabled(true);
-                                        }
-                                    } catch (JSONException e) {
-                                        throw new RuntimeException(e);
-                                    } catch (InterruptedException e) {
-                                        throw new RuntimeException(e);
-                                    }
+                                                }
+                                            } catch (JSONException e) {
+                                                throw new RuntimeException(e);
+                                            } catch (InterruptedException e) {
+                                                throw new RuntimeException(e);
+                                            }
 
-                                }
-                            },
-                            new Response.ErrorListener() {
+                                        }
+                                    },
+                                    new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            System.out.println(error.getMessage());
+                                        }
+                                    }){
+                                @Nullable
                                 @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    System.out.println(error.getMessage());
+                                protected Map<String, String> getParams() throws AuthFailureError {
+                                    Map<String,String> params = new HashMap<String, String>();
+                                    params.put("uid", sharedPreferences.getString("uid","1"));
+                                    params.put("rewards",""+scratchcoin);
+                                    params.put("reason", "credited via scratch");
+                                    return params;
                                 }
-                            }){
-                        @Nullable
-                        @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            Map<String,String> params = new HashMap<String, String>();
-                            params.put("uid", sharedPreferences.getString("uid","1"));
-                            params.put("rewards",""+scratchcoin);
-                            params.put("reason", "credited via scratch");
-                            return params;
-                        }
-                    };
+                            };
 
 // Add the request to the RequestQueue.
-                    queue.add(stringRequest);
+                            queue.add(stringRequest);
+                        }
+                        else {
+                            Toast.makeText(scratchCard.this, "Scratch Limit Over Try Again Later", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else
+                    {
+                        Toast.makeText(scratchCard.this, "No internet connection please connnect Internet", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
-                    Toast.makeText(scratchCard.this, "Scratch Limit Over Try Again Later", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(scratchCard.this, "No internet connection please connnect Internet", Toast.LENGTH_SHORT).show();
                 }
+
             }
 
             @Override
@@ -293,10 +310,10 @@ public class scratchCard extends AppCompatActivity {
 
         new CountDownTimer(getTimeDifference(), 1000) {
             public void onTick(long millisUntilFinished) {
-
+                long hour = millisUntilFinished / (60 * 60 * 1000) % 24;
                 long minute = millisUntilFinished / (60 * 1000) % 60;
                 long second = millisUntilFinished / 1000 % 60;
-                timer.setText(String.format("%02d:%02d", minute, second));
+                timer.setText(String.format("%02d:%02d:%02d", hour,minute, second));
                 cardView.setVisibility(View.GONE);
             }
 
@@ -336,7 +353,7 @@ public class scratchCard extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
 //        cal.add(Calendar.MINUTE, days);
-        cal.add(Calendar.HOUR_OF_DAY,4);
+        cal.add(Calendar.HOUR,4);
         Date futureDate = cal.getTime();
         String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(futureDate);
         myEdit.putString("scratcfuturedate",currentDateandTime);
