@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 
 public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder>{
     ArrayList<MyListData> listdata;
-
+    public int num = 1;
     // RecyclerView recyclerView;
     public MyListAdapter(ArrayList<MyListData> listdata) {
         this.listdata = listdata;
@@ -98,9 +98,12 @@ public class MyListAdapter extends RecyclerView.Adapter<MyListAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return listdata.size();
+        if(num*10 > listdata.size()){
+            return listdata.size();
+        }else{
+            return num*10;
+        }
     }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView reason;

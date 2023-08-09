@@ -129,7 +129,7 @@ public class MathQuiz extends AppCompatActivity {
             }
         });
         AdRequest adRequest = new AdRequest.Builder().build();
-        RewardedAd.load(this, "ca-app-pub-3940256099942544/5224354917",
+        RewardedAd.load(this, "ca-app-pub-8628133762932459/7753256845",
                 adRequest, new RewardedAdLoadCallback() {
                     @Override
                     public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
@@ -494,7 +494,7 @@ public class MathQuiz extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
 //        cal.add(Calendar.MINUTE, days);
-        cal.add(Calendar.HOUR, 2);
+        cal.add(Calendar.HOUR, 8);
         Date futureDate = cal.getTime();
         String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(futureDate);
         myEdit.putString("quefuturedate", currentDateandTime);

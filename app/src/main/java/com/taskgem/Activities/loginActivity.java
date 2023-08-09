@@ -208,7 +208,7 @@ public class loginActivity extends AppCompatActivity {
         }
     }
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        progressDialog=ProgressDialog.show(loginActivity.this,"","");
+        progressDialog=ProgressDialog.show(loginActivity.this,"","Logged in....");
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnSuccessListener(this, authResult -> {
@@ -285,9 +285,13 @@ public class loginActivity extends AppCompatActivity {
                     queue.add(stringRequest);
 
                 })
+                .addOnFailureListener(e -> {
+                    System.out.println(e.getMessage());
+                    System.out.println(e.getLocalizedMessage());
+                });
 
-                .addOnFailureListener(this, e -> Toast.makeText(loginActivity.this, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show());
+//                .addOnFailureListener(this, e -> Toast.makeText(loginActivity.this, e.getMessage()+"Authentication failed.",
+//                        Toast.LENGTH_SHORT).show());
     }
 
     @Override

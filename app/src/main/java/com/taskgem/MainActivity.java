@@ -70,14 +70,7 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 
 import ai.bitlabs.sdk.BitLabs;
 
-public class MainActivity extends AppCompatActivity implements
-        PollfishSurveyCompletedListener,
-        PollfishOpenedListener,
-        PollfishClosedListener,
-        PollfishSurveyReceivedListener,
-        PollfishSurveyNotAvailableListener,
-        PollfishUserNotEligibleListener,
-        PollfishUserRejectedSurveyListener {
+public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -102,29 +95,24 @@ public class MainActivity extends AppCompatActivity implements
         drawerLayout = findViewById(R.id.drawer);
         coin=findViewById(R.id.coin);
         logoimg = findViewById(R.id.logoimg);
-
         navigationView = findViewById(R.id.navigation);
         toolbar = findViewById(R.id.toolbar);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         actionBarDrawerToggle.syncState();
         toolbar.setNavigationIcon(R.drawable.threedot);
-
         navigationView.setItemIconTintList(null);
         mFirebaseAuth = FirebaseAuth.getInstance();
-
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("1026119959686-gkhb6etfqdh8e0nu306iml9smuu2iiv3.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
-
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
         AdRequest adRequest = new AdRequest.Builder().build();
-
-        InterstitialAd.load(this, "ca-app-pub-3940256099942544/1033173712", adRequest,
+        InterstitialAd.load(this, "ca-app-pub-8628133762932459/3482839340", adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
@@ -147,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements
         user = view.findViewById(R.id.user);
         email = view.findViewById(R.id.email);
         profile = view.findViewById(R.id.profile);
-        initPollfish();
+
         BitLabs.INSTANCE.init(this, "6d283b86-f543-4e3c-90b9-68e24e7b2744", sharedPreferences.getString("email", "user"));
         Glide
                 .with(this)
@@ -397,12 +385,12 @@ public class MainActivity extends AppCompatActivity implements
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.taskgem")));
                 }
                 if (item.getItemId() == R.id.support) {
-                    Intent intent = new Intent(Intent.ACTION_SEND);
-                    intent.setType("plain/text");
-                    intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "taskgemapp@gmail.com" });
-                    intent.putExtra(Intent.EXTRA_SUBJECT, "TaskGem Support");
-                    intent.putExtra(Intent.EXTRA_TEXT, "Hello TaskGem");
-                    startActivity(Intent.createChooser(intent, ""));
+
+                    Intent email = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:taskgemapp@gmail.com"));
+//                    email.putExtra(Intent.EXTRA_EMAIL, new String[]{"taskgemapp@gmail.com"});
+                    email.putExtra(Intent.EXTRA_SUBJECT, "TaskGem Support");
+                    email.putExtra(Intent.EXTRA_TEXT, "Hello");
+                    startActivity(Intent.createChooser(email, "Choose an Email client :"));
 
                 }
                 if (item.getItemId() == R.id.logout) {
@@ -434,53 +422,6 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
     }
-    private void initPollfish() {
-        Params params = new Params.Builder("3cc67a3f-e1fb-4ab0-887f-a143f8871be6")
-                .rewardMode(true)
-                .build();
-        Pollfish.initWith(this, params);
-    }
-    @Override
-    public void onPollfishSurveyCompleted(@NotNull SurveyInfo surveyInfo) {
-//        coinsBtn.setVisibility(View.GONE);
 
-        // in a real world scenario you should wait here for verification from s2s callback prior rewarding your users
-//        loggingTxt.setText(getString(R.string.survey_completed, surveyInfo.getRewardValue() == null ? 200 : surveyInfo.getRewardValue()));
-    }
 
-    @Override
-    public void onPollfishSurveyReceived(SurveyInfo surveyInfo) {
-//        coinsBtn.setVisibility(View.VISIBLE);
-//        coinsBtn.setText(getString(R.string.win_coins, surveyInfo != null && surveyInfo.getRewardValue() != null ? surveyInfo.getRewardValue() : 200));
-        Log.d(TAG, getString(R.string.survey_received));
-    }
-
-    @Override
-    public void onPollfishClosed() {
-        Log.d(TAG, getString(R.string.on_pollfish_closed));
-    }
-
-    @Override
-    public void onPollfishOpened() {
-        Log.d(TAG, getString(R.string.on_pollfish_opened));
-    }
-
-    @Override
-    public void onPollfishSurveyNotAvailable() {
-        Log.d(TAG, getString(R.string.survey_not_available));
-//        loggingTxt.setText(R.string.survey_not_available);
-    }
-
-    @Override
-    public void onUserNotEligible() {
-        Log.d(TAG, getString(R.string.user_not_eligible));
-//        coinsBtn.setVisibility(View.GONE);
-//        loggingTxt.setText(R.string.user_not_eligible);
-    }
-
-    @Override
-    public void onUserRejectedSurvey() {
-//        coinsBtn.setVisibility(View.GONE);
-//        loggingTxt.setText(R.string.user_rejected_survey);
-    }
 }

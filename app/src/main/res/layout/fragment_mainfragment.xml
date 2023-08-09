@@ -86,6 +86,7 @@
              android:layout_height="wrap_content"
              android:text="Top Offers"/>
          <LinearLayout
+
              android:id="@+id/l1"
              android:layout_margin="@dimen/_15sdp"
              android:background="@drawable/offer1"
@@ -111,50 +112,7 @@
                      android:textColor="@color/blackish"
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
-                     android:text="Pollfish Survey"/>
-                 <TextView
-                     android:textSize="@dimen/_12sdp"
-                     android:layout_marginLeft="@dimen/_10sdp"
-                     android:fontFamily="@font/regular"
-                     android:textColor="@color/blackish"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:text="Get coins for taking surveys"/>
-             </LinearLayout>
-             <ImageView
-                 android:layout_marginEnd="@dimen/_7sdp"
-                 android:layout_gravity="center"
-                 android:layout_width="@dimen/_15sdp"
-                 android:layout_height="@dimen/_15sdp"
-                 android:src="@drawable/arraow"/>
-         </LinearLayout>
-         <LinearLayout
-             android:id="@+id/l2"
-             android:layout_marginHorizontal="@dimen/_15sdp"
-             android:background="@drawable/offer2"
-             android:layout_width="match_parent"
-             android:orientation="horizontal"
-             android:layout_height="@dimen/_70sdp">
-             <ImageView
-                 android:layout_gravity="center"
-                 android:layout_width="@dimen/_50sdp"
-                 android:layout_height="@dimen/_50sdp"
-                 android:padding="@dimen/_5sdp"
-                 android:src="@drawable/medis"/>
-             <LinearLayout
-                 android:layout_weight="1"
-                 android:layout_width="wrap_content"
-                 android:layout_height="match_parent"
-                 android:orientation="vertical">
-                 <TextView
-                     android:textSize="@dimen/_15sdp"
-                     android:layout_marginTop="@dimen/_10sdp"
-                     android:layout_marginLeft="@dimen/_10sdp"
-                     android:fontFamily="@font/semibold"
-                     android:textColor="@color/blackish"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:text="AdGate Media"/>
+                     android:text="Pollfish"/>
                  <TextView
                      android:textSize="@dimen/_12sdp"
                      android:layout_marginLeft="@dimen/_10sdp"
@@ -214,6 +172,51 @@
                  android:layout_height="@dimen/_15sdp"
                  android:src="@drawable/arraow"/>
          </LinearLayout>
+         <LinearLayout
+             android:id="@+id/l2"
+             android:layout_marginHorizontal="@dimen/_15sdp"
+             android:background="@drawable/offer2"
+             android:layout_width="match_parent"
+             android:orientation="horizontal"
+             android:layout_height="@dimen/_70sdp">
+             <ImageView
+                 android:layout_gravity="center"
+                 android:layout_width="@dimen/_50sdp"
+                 android:layout_height="@dimen/_50sdp"
+                 android:padding="@dimen/_5sdp"
+                 android:src="@drawable/cpx"/>
+             <LinearLayout
+                 android:layout_weight="1"
+                 android:layout_width="wrap_content"
+                 android:layout_height="match_parent"
+                 android:orientation="vertical">
+
+                 <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="23dp"
+                     android:layout_marginLeft="@dimen/_10sdp"
+                     android:layout_marginTop="@dimen/_10sdp"
+                     android:fontFamily="@font/semibold"
+                     android:text="Cpx Research"
+                     android:textColor="@color/blackish"
+                     android:textSize="@dimen/_15sdp" />
+                 <TextView
+                     android:textSize="@dimen/_12sdp"
+                     android:layout_marginLeft="@dimen/_10sdp"
+                     android:fontFamily="@font/regular"
+                     android:textColor="@color/blackish"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:text="Get coins for taking surveys"/>
+             </LinearLayout>
+             <ImageView
+                 android:layout_marginEnd="@dimen/_7sdp"
+                 android:layout_gravity="center"
+                 android:layout_width="@dimen/_15sdp"
+                 android:layout_height="@dimen/_15sdp"
+                 android:src="@drawable/arraow"/>
+         </LinearLayout>
+
          <TextView
              android:textSize="@dimen/_15sdp"
              android:layout_marginTop="@dimen/_10sdp"
@@ -240,18 +243,19 @@
                      android:layout_width="@dimen/_60sdp"
                      android:layout_height="@dimen/_60sdp"
                      android:layout_centerInParent="true"
-                     android:src="@drawable/scratch" />
+                     android:src="@drawable/logo_current" />
+
                  <TextView
-                     android:layout_marginTop="@dimen/_7sdp"
-                     android:layout_centerInParent="true"
-                     android:layout_below="@id/scratch1"
-                     android:textSize="@dimen/_13sdp"
-                     android:textStyle="italic"
-                     android:fontFamily="@font/semibold"
-                     android:textColor="@color/blackish"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
-                     android:text="Scratch Card"/>
+                     android:layout_below="@id/scratch1"
+                     android:layout_centerInParent="true"
+                     android:layout_marginTop="@dimen/_7sdp"
+                     android:fontFamily="@font/semibold"
+                     android:text="theoremreach"
+                     android:textColor="@color/blackish"
+                     android:textSize="@dimen/_13sdp"
+                     android:textStyle="italic" />
 
              </RelativeLayout>
              <RelativeLayout
@@ -301,7 +305,7 @@
                      android:layout_width="@dimen/_60sdp"
                      android:layout_height="@dimen/_60sdp"
                      android:layout_centerInParent="true"
-                     android:src="@drawable/videozone" />
+                     android:src="@drawable/monlix" />
 
                  <TextView
                      android:layout_width="wrap_content"
@@ -310,7 +314,7 @@
                      android:layout_centerInParent="true"
                      android:layout_marginTop="@dimen/_7sdp"
                      android:fontFamily="@font/semibold"
-                     android:text="SurveyMonkey"
+                     android:text="Monlix"
                      android:textColor="@color/blackish"
                      android:textSize="@dimen/_13sdp"
                      android:textStyle="italic" />
@@ -398,7 +402,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+        ads:adUnitId="ca-app-pub-8628133762932459/8974839175">
     </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>

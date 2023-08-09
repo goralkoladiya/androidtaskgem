@@ -4,6 +4,7 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
         maven { url 'https://jitpack.io' }
+        maven { url "https://artifactory.tools.tapresearch.io/artifactory/tapresearch-android-sdk/" }
     }
 
 }

@@ -98,15 +98,19 @@ public class ReferActivity extends AppCompatActivity {
         invite.setText("INVITE CODE: "+sharedPreferences.getString("token","ABCD"));
         invitees.setText("TOTAL INVITES - 0");
         share.setOnClickListener(view -> {
-            String msg="Hey, we’re happy to invite you to join our referral program and share it with your friends to get more rewards" +
+            String msg="Hey, we’re happy to invite you to join our referral program and share it with your friends to get more rewards  " +
                     "https://play.google.com/store/apps/details?id=com.taskgem";
             Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);
             txtIntent.setType("text/plain");
             txtIntent.putExtra(android.content.Intent.EXTRA_TEXT,msg);
             startActivity(Intent.createChooser(txtIntent ,"Share"));
         });
+        //It should be like this-
+        //
+        //
+        //Hey, we’re happy to invite you to join our referral program and share it with your friends to get more rewards   https://play.google.com/store/apps/details?id=com.taskgem
         invitenow.setOnClickListener(view -> {
-            String msg="Hey, we’re happy to invite you to join our referral program and share it with your friends to get more rewards" +
+            String msg="Hey, we’re happy to invite you to join our referral program and share it with your friends to get more rewards  " +
                     "https://play.google.com/store/apps/details?id=com.taskgem";
             Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);
             txtIntent.setType("text/plain");
@@ -118,7 +122,7 @@ public class ReferActivity extends AppCompatActivity {
             boolean isAppInstalled = appInstalledOrNot("com.facebook.katana");
 
             if(isAppInstalled) {
-                String msg="Hey, we’re happy to invite you to join our referral program and share it with your friends to get more rewards" +
+                String msg="Hey, we’re happy to invite you to join our referral program and share it with your friends to get more rewards  " +
                         "https://play.google.com/store/apps/details?id=com.taskgem";
                 Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);
                 txtIntent.setType("text/plain");
@@ -134,7 +138,7 @@ public class ReferActivity extends AppCompatActivity {
             boolean isAppInstalled = appInstalledOrNot("com.whatsapp");
             if(isAppInstalled)
                 {
-                    String msg="Hey, we’re happy to invite you to join our referral program and share it with your friends to get more rewards" +
+                    String msg="Hey, we’re happy to invite you to join our referral program and share it with your friends to get more rewards  " +
                             "https://play.google.com/store/apps/details?id=com.taskgem";
                     Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);
                     txtIntent .setType("text/plain");
@@ -144,7 +148,7 @@ public class ReferActivity extends AppCompatActivity {
                 }
             else if(appInstalledOrNot("com.whatsapp.w4b"))
                 {
-                    String msg="Hey, we’re happy to invite you to join our referral program and share it with your friends to get more rewards" +
+                    String msg="Hey, we’re happy to invite you to join our referral program and share it with your friends to get more rewards  " +
                             "https://play.google.com/store/apps/details?id=com.taskgem";
                     Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);
                     txtIntent .setType("text/plain");
@@ -161,7 +165,7 @@ public class ReferActivity extends AppCompatActivity {
             boolean isAppInstalled = appInstalledOrNot("org.telegram.messenger");
             if(isAppInstalled)
             {
-                String msg="Hey, we’re happy to invite you to join our referral program and share it with your friends to get more rewards" +
+                String msg="Hey, we’re happy to invite you to join our referral program and share it with your friends to get more rewards  " +
                         "https://play.google.com/store/apps/details?id=com.taskgem";
                 Intent txtIntent = new Intent(android.content.Intent.ACTION_SEND);
                 txtIntent .setType("text/plain");

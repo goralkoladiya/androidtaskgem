@@ -5,6 +5,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('D:\\flutterprojects\\androidtaskgem\\taskgem.jks')
+            storePassword 'taskgem'
+            keyAlias 'taskgem'
+            keyPassword 'taskgem'
+        }
+    }
     namespace 'com.taskgem'
     compileSdk 33
 
@@ -12,8 +20,8 @@ android {
         applicationId "com.taskgem"
         minSdk 24
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.2"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -22,16 +30,20 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
         coreLibraryDesugaringEnabled true
-        sourceCompatibility "11"
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
-}
+    buildFeatures { dataBinding true }
 
+}
 dependencies {
+    implementation files('D:\\flutterprojects\\androidtaskgem\\app\\libs\\tapresearch.aar')
+    implementation files('D:\\flutterprojects\\androidtaskgem\\app\\libs\\theoremreach-3.3.5.aar')
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
@@ -48,9 +60,12 @@ dependencies {
     implementation 'com.github.AnupKumarPanwar:ScratchView:1.9.1'
     implementation "com.android.installreferrer:installreferrer:2.2"
     implementation 'com.pollfish:pollfish-googleplay:6.4.0'
-    implementation 'com.google.android.gms:play-services-ads:22.0.0'
+    implementation 'com.google.android.gms:play-services-ads:22.1.0'
     implementation 'com.github.BitBurst-GmbH.bitlabs-android-library:core:3.1.1'
     implementation 'com.surveymonkey:surveymonkey-android-sdk:3.0.2'
     implementation 'com.github.mopinion-com:native-android-sdk:1.0.6'
     implementation 'com.github.afreakyelf:Pdf-Viewer:v1.0.7'
+    implementation 'com.gitlab.adgate-media:androidsdk:2.1.1'
+    implementation 'com.github.MakeOpinionGmbH:cpx-research-SDK-Android:1.5.9'
+    implementation 'com.github.Monlix:android-sdk:v0.2'
 }

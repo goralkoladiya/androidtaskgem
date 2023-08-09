@@ -17,6 +17,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.os.CountDownTimer;
@@ -100,7 +101,7 @@ public class spin extends AppCompatActivity {
             }
         });
         AdRequest adRequest = new AdRequest.Builder().build();
-        RewardedAd.load(this, "ca-app-pub-3940256099942544/5224354917",
+        RewardedAd.load(this, "ca-app-pub-8628133762932459/7753256845",
                 adRequest, new RewardedAdLoadCallback() {
                     @Override
                     public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
@@ -115,7 +116,7 @@ public class spin extends AppCompatActivity {
                         Log.d("TAG", "Ad was loaded.");
                     }
                 });
-        InterstitialAd.load(this,"ca-app-pub-3940256099942544/1033173712", adRequest,
+        InterstitialAd.load(this,"ca-app-pub-8628133762932459/3482839340", adRequest,
                 new InterstitialAdLoadCallback() {
                     @Override
                     public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
@@ -225,7 +226,6 @@ public class spin extends AppCompatActivity {
                                                                     rewardedAd.show(activityContext, new OnUserEarnedRewardListener() {
                                                                         @Override
                                                                         public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
-                                                                            // Handle the reward.
                                                                             Log.d("TAG", "The user earned the reward.");
                                                                             int rewardAmount = rewardItem.getAmount();
                                                                             String rewardType = rewardItem.getType();
@@ -321,10 +321,6 @@ public class spin extends AppCompatActivity {
                 else {
                     Toast.makeText(spin.this, "No internet connection please connnect Internet", Toast.LENGTH_SHORT).show();
                 }
-
-
-
-
             }
         });
     }
@@ -388,7 +384,7 @@ public class spin extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         cal.setTime(currentDate);
 //        cal.add(Calendar.MINUTE, days);
-        cal.add(Calendar.HOUR,3);
+        cal.add(Calendar.HOUR,4);
         Date futureDate = cal.getTime();
         String currentDateandTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(futureDate);
         myEdit.putString("futuredate",currentDateandTime);

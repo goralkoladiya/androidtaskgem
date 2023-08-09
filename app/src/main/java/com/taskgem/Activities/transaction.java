@@ -16,6 +16,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -39,17 +40,20 @@ import java.util.ArrayList;
 
 public class transaction extends AppCompatActivity {
     Toolbar toolbar;
+    Button button;
     RecyclerView recyclerView;
     SharedPreferences sharedPreferences ;
     SharedPreferences.Editor myEdit;
     ArrayList<MyListData> listdata;
     int rewards=0;
+    MyListAdapter adapter;
     ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
         toolbar=findViewById(R.id.toolbar);
+        button=findViewById(R.id.all);
         listdata=new ArrayList<>();
         toolbar.setContentInsetsAbsolute(0,toolbar.getContentInsetStartWithNavigation());
         toolbar.setNavigationIcon(R.drawable.back);
@@ -61,6 +65,7 @@ public class transaction extends AppCompatActivity {
                 finish();
             }
         });
+
 
         sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
         recyclerView=findViewById(R.id.recycle);
@@ -102,7 +107,7 @@ public class transaction extends AppCompatActivity {
 
                                     myEdit.putInt("rewards",rewards);
                                     myEdit.commit();
-                                    MyListAdapter adapter = new MyListAdapter(listdata);
+                                     adapter = new MyListAdapter(listdata);
                                     recyclerView.setHasFixedSize(true);
                                     recyclerView.setLayoutManager(new LinearLayoutManager(transaction.this));
                                     recyclerView.setAdapter(adapter);
@@ -128,6 +133,11 @@ public class transaction extends AppCompatActivity {
             Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
 
+        button.setOnClickListener(v -> {
+            if((adapter.num)*10 < listdata.size())
+                adapter.num = adapter.num +1;
+            adapter.notifyDataSetChanged();
+        });
     }
     @Override
     public void onBackPressed() {

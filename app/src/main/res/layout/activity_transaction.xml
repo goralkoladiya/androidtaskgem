@@ -29,8 +29,24 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recycle"/>
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <androidx.recyclerview.widget.RecyclerView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_above="@id/all"
+           android:id="@+id/recycle"/>
+       <Button
+           android:visibility="gone"
+           android:layout_marginHorizontal="@dimen/_10sdp"
+           android:layout_alignParentBottom="true"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:id="@+id/all"
+           android:background="@drawable/queans"
+           app:backgroundTint="@null"
+           android:fontFamily="@font/semibold"
+           android:text="Show All"/>
+   </RelativeLayout>
 </LinearLayout>
